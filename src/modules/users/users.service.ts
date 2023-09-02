@@ -5,8 +5,10 @@ import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
+import { CredentailsDontMatchException } from "./exceptions/credentails-dont-match.exception";
 import { UserNameNotAllowedException } from "./exceptions/userNameNotAllowed.exception";
 import { UserNotFoundException } from "./exceptions/userNotFound.exception";
+import { UserPayloadInterface } from "./interfaces/user.payload.interface";
 
 @Injectable()
 export class UsersService {
@@ -65,16 +67,11 @@ export class UsersService {
     async validate(
         user: User,
         password: string
-    ): Promise<Omit<User, "password">> {
+    ): Promise<UserPayloadInterface> {
         if (user && compareSync(password, user.password)) {
-            delete user["password"];
-            delete user["first_name"];
-            delete user["last_name"];
-            delete user["profile"];
-            delete user["avatar"];
-            return user;
+            return { user_id: user.user_id, user_name: user.user_name };
         }
-        return null;
+        throw new CredentailsDontMatchException();
     }
 
     private async checkUserWithSameUserName(user_name: string) {
