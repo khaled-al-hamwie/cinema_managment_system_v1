@@ -15,7 +15,6 @@ import { AuthService } from "./auth.service";
 // import { UserDecorator } from "src/core/common/decorators/user.decorator";
 // import { AdminGuard } from "src/core/common/guards/admin.guard";
 import { User, User as UserEntity } from "../users/entities/user.entity";
-import { RegisterAdminDto } from "./dto/register-admin.dto";
 import { RegisterUserDto } from "./dto/register-user.dto";
 import { AuthAction } from "./enums/acth.actions.enum";
 import { AuthAbilityFactory } from "./factories/auth-ability.factory";
