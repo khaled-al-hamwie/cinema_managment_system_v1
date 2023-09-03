@@ -14,8 +14,10 @@ import {
     UseInterceptors,
 } from "@nestjs/common";
 import { UserDecorator } from "src/core/decorators/user.decorator";
+import { IsNull, Not } from "typeorm";
 import { LoggedInGuard } from "../auth/guards/logged-in.guard";
 import { FindAllUserDto } from "./dto/findAll-user.dto";
+import { RestoreUserDto } from "./dto/restore-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
 import { UsersActions } from "./enums/users.actions.enum";
@@ -115,28 +117,25 @@ export class UsersController {
         return this.usersService.remove(wantedUser);
     }
 
-    // @Post("restore")
-    // async restore(
-    //     @UserDecorator() user: User,
-    //     @Body() restoreUserDto: RestoreUserDto,
-    // ) {
-    //     const ability = this.usersAbilityFactory.createForUser(user);
-    //     if (ability.cannot(Action.Restore, User))
-    //         throw new UnauthorizedException();
-    //     const wantedUser = await this.usersService.findOne({
-    //         where: {
-    //             user_name: restoreUserDto.user_name,
-    //             deleted_at: Not(IsNull()),
-    //         },
-    //         relations: { role: true },
-    //         withDeleted: true,
-    //     });
-    //     if (!wantedUser) throw new UserNotFoundException();
-    //     if (ability.can(Action.Restore, wantedUser)) {
-    //         return this.usersService.restore(wantedUser);
-    //     }
-    //     throw new UserNotFoundException();
-    // }
+    @Post("restore")
+    async restore(
+        @UserDecorator() user: UserPayloadInterface,
+        @Body() restoreUserDto: RestoreUserDto
+    ) {
+        const wantedUser = await this.usersService.findOne({
+            where: {
+                user_name: restoreUserDto.user_name,
+                deleted_at: Not(IsNull()),
+            },
+            withDeleted: true,
+        });
+        this.usersValidateService.checkAbility(
+            UsersActions.RestoreUser,
+            user,
+            wantedUser
+        );
+        return this.usersService.restore(wantedUser);
+    }
 
     @Delete(":id")
     async block(

@@ -54,11 +54,11 @@ export class UsersService {
         return { message: "user has been removed succsesfully" };
     }
 
-    // async restore(user: User) {
-    //     if (!user) throw new UserNotFoundException();
-    //     await this.usersRepository.recover(user);
-    //     return { message: "user has been restored succsesfully" };
-    // }
+    async restore(user: User) {
+        if (!user) throw new UserNotFoundException();
+        await this.usersRepository.recover(user);
+        return { message: "user has been restored succsesfully" };
+    }
 
     userIsAdmin(user: User | UserPayloadInterface): boolean {
         return user.is_admin;
