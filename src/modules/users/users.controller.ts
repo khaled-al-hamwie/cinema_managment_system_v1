@@ -57,12 +57,13 @@ export class UsersController {
         }
         throw new UserUnauthorizedException();
     }
-    // @Get("profile")
-    // async showProfile(@UserDecorator() user: User) {
-    //     const options = this.usersShowProfileProvider.GetOptions(user.user_id);
-    //     const profile = await this.usersService.findOne(options);
-    //     return profile;
-    // }
+    @Get("profile")
+    async showProfile(@UserDecorator() user: User) {
+        const options = this.usersShowProfileProvider.GetOptions(user.user_id);
+        const profile = await this.usersService.findOne(options);
+        return profile;
+    }
+
     // @Get(":id")
     // async findOne(
     //     @UserDecorator() user: User,
