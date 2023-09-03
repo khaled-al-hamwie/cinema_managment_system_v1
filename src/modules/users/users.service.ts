@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { hashSync } from "bcrypt";
+import { UploadService } from "src/core/uploads/upload.service";
 import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -13,7 +14,8 @@ import { UserPayloadInterface } from "./interfaces/user.payload.interface";
 export class UsersService {
     constructor(
         @InjectRepository(User)
-        private usersRepository: Repository<User>
+        private usersRepository: Repository<User>,
+        private readonly UploadService: UploadService
     ) {}
     async create(createUserDto: CreateUserDto) {
         await this.checkUserWithSameUserName(createUserDto.user_name);
@@ -41,12 +43,15 @@ export class UsersService {
         return { message: "user has been updated succsesfully" };
     }
 
-    // async putAvatar(user_id: number, avatar: Express.Multer.File) {
-    //     const user = await this.findOne({ where: { user_id } });
-    //     user.avatar = avatar ? avatar.path : "";
-    //     this.usersRepository.save(user);
-    //     return { message: "avatar has been upload" };
-    // }
+    async putAvatar(user_id: number, avatar: Express.Multer.File) {
+        const user = await this.findOne({ where: { user_id } });
+        if (avatar) {
+            user.pic = this.UploadService.createName(avatar.originalname);
+            this.UploadService.upload(avatar.buffer, user.pic, "avatar");
+        } else user.pic = "";
+        this.usersRepository.save(user);
+        return { message: "avatar has been upload" };
+    }
 
     async remove(user: User) {
         if (!user) throw new UserNotFoundException();

@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { UploadModule } from "src/core/uploads/upload.module";
 import { User } from "./entities/user.entity";
 import { UsersAbilityFactory } from "./factories/users-ability.factory";
 import { UsersFindAllProvider } from "./providers/users-findAll.provider";
@@ -9,7 +10,7 @@ import { UsersController } from "./users.controller";
 import { UsersService } from "./users.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User])],
+    imports: [TypeOrmModule.forFeature([User]), UploadModule],
     controllers: [UsersController],
     providers: [
         UsersAbilityFactory,

@@ -22,9 +22,9 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
 import { UsersActions } from "./enums/users.actions.enum";
 import { UserNotFoundException } from "./exceptions/userNotFound.exception";
-import { UsersAbilityFactory } from "./factories/users-ability.factory";
-import { AvatarInterceptor } from "./interceptors/avatar.interceptor";
+import { UsersInterceptor } from "./interceptors/users.interceptor";
 import { UserPayloadInterface } from "./interfaces/user.payload.interface";
+import { UsersPipe } from "./pipes/users.pipe";
 import { UsersFindAllProvider } from "./providers/users-findAll.provider";
 import { UsersShowProfileProvider } from "./providers/users-showProfile.provider";
 import { UsersValidateService } from "./services/users.validate.service";
@@ -95,14 +95,14 @@ export class UsersController {
         return this.usersService.update(requiredUser, updateUserDto);
     }
 
-    // @UseInterceptors(AvatarInterceptor)
-    // @Put("avatar")
-    // async addAvatar(
-    //     @UserDecorator("user_id") user_id: number,
-    //     @UploadedFile() avatar: Express.Multer.File,
-    // ) {
-    //     return this.usersService.putAvatar(user_id, avatar);
-    // }
+    @UseInterceptors(UsersInterceptor)
+    @Put("avatar")
+    async addAvatar(
+        @UserDecorator("user_id") user_id: number,
+        @UploadedFile(new UsersPipe()) image?: Express.Multer.File
+    ) {
+        return this.usersService.putAvatar(user_id, image);
+    }
 
     @Delete()
     async remove(@UserDecorator() user: UserPayloadInterface) {
