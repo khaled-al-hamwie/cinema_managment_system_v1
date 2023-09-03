@@ -14,10 +14,8 @@ import {
     UseGuards,
     UseInterceptors,
 } from "@nestjs/common";
-// import { UserDecorator } from "src/core/common/decorators/user.decorator";
-import { IsNull, Not } from "typeorm";
-// import { Action } from "../auth/enums/actions.enum";
 import { UserDecorator } from "src/core/decorators/user.decorator";
+import { IsNull, Not } from "typeorm";
 import { LoggedInGuard } from "../auth/guards/logged-in.guard";
 import { FindAllUserDto } from "./dto/findAll-user.dto";
 import { RestoreUserDto } from "./dto/restore-user.dto";
@@ -28,6 +26,7 @@ import { UserNotFoundException } from "./exceptions/userNotFound.exception";
 import { UserUnauthorizedException } from "./exceptions/userUnauthorized.exception";
 import { UsersAbilityFactory } from "./factories/users-ability.factory";
 import { AvatarInterceptor } from "./interceptors/avatar.interceptor";
+import { UserPayloadInterface } from "./interfaces/user.payload.interface";
 import { UsersFindAllProvider } from "./providers/users-findAll.provider";
 import { UsersShowProfileProvider } from "./providers/users-showProfile.provider";
 import { UsersService } from "./users.service";
@@ -58,37 +57,35 @@ export class UsersController {
         throw new UserUnauthorizedException();
     }
     @Get("profile")
-    async showProfile(@UserDecorator() user: User) {
+    async showProfile(@UserDecorator() user: UserPayloadInterface) {
         const options = this.usersShowProfileProvider.GetOptions(user.user_id);
         const profile = await this.usersService.findOne(options);
         return profile;
     }
 
-    // @Get(":id")
-    // async findOne(
-    //     @UserDecorator() user: User,
-    //     @Param("id", ParseIntPipe) user_id: number,
-    // ) {
-    //     const ability = this.usersAbilityFactory.createForUser(user);
-    //     if (ability.can(Action.Read, User)) {
-    //         const requiredUser = await this.usersService.findOne({
-    //             where: { user_id },
-    //             relations: { role: true },
-    //         });
-    //         if (!requiredUser || ability.cannot(Action.Read, requiredUser))
-    //             throw new UserNotFoundException();
-    //         return requiredUser;
-    //     }
-    //     throw new UserUnauthorizedException();
-    // }
+    @Get(":id")
+    async findOne(
+        @UserDecorator() user: UserPayloadInterface,
+        @Param("id", ParseIntPipe) user_id: number
+    ) {
+        const ability = this.usersAbilityFactory.createForUser(user);
+        if (ability.can(UsersActions.SeeUsers, User)) {
+            const requiredUser = await this.usersService.findOne({
+                where: { user_id },
+            });
+            if (!requiredUser) throw new UserNotFoundException();
+            return requiredUser;
+        }
+        throw new UserUnauthorizedException();
+    }
 
-    // @Patch()
-    // async update(
-    //     @UserDecorator() user: User,
-    //     @Body() updateUserDto: UpdateUserDto,
-    // ) {
-    //     await this.usersService.update(user, updateUserDto);
-    // }
+    @Patch()
+    update(
+        @UserDecorator() user: UserPayloadInterface,
+        @Body() updateUserDto: UpdateUserDto
+    ) {
+        return this.usersService.update(user, updateUserDto);
+    }
 
     // @UseInterceptors(AvatarInterceptor)
     // @Put("avatar")

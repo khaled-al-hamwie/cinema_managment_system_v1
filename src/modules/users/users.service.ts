@@ -37,13 +37,16 @@ export class UsersService {
         return requiredUser;
     }
 
-    // async update(user: User, updateUserDto: UpdateUserDto) {
-    //     const requiredUser = await this.findOne({
-    //         where: { user_id: user.user_id },
-    //     });
-    //     this.usersRepository.save({ ...requiredUser, ...updateUserDto });
-    //     return { message: "user has been updated succsesfully" };
-    // }
+    async update(
+        user: User | UserPayloadInterface,
+        updateUserDto: UpdateUserDto
+    ) {
+        const requiredUser = await this.findOne({
+            where: { user_id: user.user_id },
+        });
+        this.usersRepository.save({ ...requiredUser, ...updateUserDto });
+        return { message: "user has been updated succsesfully" };
+    }
 
     // async putAvatar(user_id: number, avatar: Express.Multer.File) {
     //     const user = await this.findOne({ where: { user_id } });
