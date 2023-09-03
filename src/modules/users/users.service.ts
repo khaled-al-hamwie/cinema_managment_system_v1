@@ -69,7 +69,11 @@ export class UsersService {
         password: string
     ): Promise<UserPayloadInterface> {
         if (user && compareSync(password, user.password)) {
-            return { user_id: user.user_id, user_name: user.user_name };
+            return {
+                user_id: user.user_id,
+                user_name: user.user_name,
+                is_admin: user.is_admin,
+            };
         }
         throw new CredentailsDontMatchException();
     }

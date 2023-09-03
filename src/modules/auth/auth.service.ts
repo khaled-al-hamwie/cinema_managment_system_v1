@@ -1,14 +1,18 @@
 import { Injectable } from "@nestjs/common";
-// import { UsersService } from "../users/services/users.service";
 import { UsersService } from "../users/users.service";
 import { RegisterUserDto } from "./dto/register-user.dto";
 
 @Injectable()
 export class AuthService {
     constructor(private readonly UsersService: UsersService) {}
-    async register(registerUserDto: RegisterUserDto) {
-        const user = await this.UsersService.create(registerUserDto);
+    async register(registerUserDto: RegisterUserDto, is_admin = false) {
+        const user = await this.UsersService.create({
+            ...registerUserDto,
+            is_admin,
+        });
         delete user.password;
+        delete user.deleted_at;
+        delete user.is_admin;
         return user;
     }
 }
