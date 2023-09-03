@@ -24,9 +24,9 @@ export class UsersService {
         return user;
     }
 
-    // findAll(options: FindManyOptions<User>) {
-    //     return this.usersRepository.find(options);
-    // }
+    findAll(options: FindManyOptions<User>) {
+        return this.usersRepository.find(options);
+    }
 
     async findOne(
         options: FindOneOptions<User>,
@@ -76,6 +76,10 @@ export class UsersService {
             };
         }
         throw new CredentailsDontMatchException();
+    }
+
+    userIsAdmin(user: User | UserPayloadInterface): boolean {
+        return user.is_admin;
     }
 
     private async checkUserWithSameUserName(user_name: string) {

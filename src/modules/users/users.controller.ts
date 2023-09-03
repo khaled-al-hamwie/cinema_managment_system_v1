@@ -8,18 +8,22 @@ import {
     Patch,
     Post,
     Put,
+    Query,
     UnauthorizedException,
     UploadedFile,
     UseGuards,
     UseInterceptors,
 } from "@nestjs/common";
 // import { UserDecorator } from "src/core/common/decorators/user.decorator";
-// import { LoggedInGuard } from "src/core/common/guards/logged-in.guard";
 import { IsNull, Not } from "typeorm";
 // import { Action } from "../auth/enums/actions.enum";
+import { UserDecorator } from "src/core/decorators/user.decorator";
+import { LoggedInGuard } from "../auth/guards/logged-in.guard";
+import { FindAllUserDto } from "./dto/findAll-user.dto";
 import { RestoreUserDto } from "./dto/restore-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
+import { UsersActions } from "./enums/users.actions.enum";
 import { UserNotFoundException } from "./exceptions/userNotFound.exception";
 import { UserUnauthorizedException } from "./exceptions/userUnauthorized.exception";
 import { UsersAbilityFactory } from "./factories/users-ability.factory";
@@ -28,7 +32,7 @@ import { UsersFindAllProvider } from "./providers/users-findAll.provider";
 import { UsersShowProfileProvider } from "./providers/users-showProfile.provider";
 import { UsersService } from "./users.service";
 
-// @UseGuards(LoggedInGuard)
+@UseGuards(LoggedInGuard)
 @Controller("users")
 export class UsersController {
     constructor(
@@ -38,15 +42,21 @@ export class UsersController {
         private readonly usersShowProfileProvider: UsersShowProfileProvider
     ) {}
 
-    // @Get()
-    // findAll(@UserDecorator() user: User) {
-    //     const ability = this.usersAbilityFactory.createForUser(user);
-    //     if (ability.can(Action.Read, User)) {
-    //         const options = this.usersFindAllProvider.GetOptions();
-    //         return this.usersService.findAll(options);
-    //     }
-    //     throw new UnauthorizedException();
-    // }
+    @Get()
+    async findAll(
+        @UserDecorator() user: User,
+        @Query() findAllUserDto: FindAllUserDto
+    ) {
+        const ability = this.usersAbilityFactory.createForUser(user);
+        if (ability.can(UsersActions.SeeUsers, User)) {
+            const options =
+                this.usersFindAllProvider.GetOptions(findAllUserDto);
+            const users = await this.usersService.findAll(options);
+            if (users.length < 1) throw new UserNotFoundException();
+            return users;
+        }
+        throw new UserUnauthorizedException();
+    }
     // @Get("profile")
     // async showProfile(@UserDecorator() user: User) {
     //     const options = this.usersShowProfileProvider.GetOptions(user.user_id);
