@@ -5,6 +5,7 @@ import { SessionsModule } from "./core/sessions/sessions.module";
 import { UploadModule } from "./core/uploads/upload.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
+import { MoviesModule } from './modules/movies/movies.module';
 
 @Module({
     imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from "./modules/users/users.module";
         UploadModule,
         UsersModule,
         AuthModule,
+        MoviesModule,
     ],
 })
 export class AppModule {}
