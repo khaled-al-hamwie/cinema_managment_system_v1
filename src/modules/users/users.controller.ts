@@ -96,13 +96,13 @@ export class UsersController {
     //     return this.usersService.putAvatar(user_id, avatar);
     // }
 
-    // @Delete()
-    // async remove(@UserDecorator("user_id") user_id: number) {
-    //     const wantedUser = await this.usersService.findOne({
-    //         where: { user_id },
-    //     });
-    //     return this.usersService.remove(wantedUser);
-    // }
+    @Delete()
+    async remove(@UserDecorator("user_id") user_id: number) {
+        const wantedUser = await this.usersService.findOne({
+            where: { user_id },
+        });
+        return this.usersService.remove(wantedUser);
+    }
 
     // @Post("restore")
     // async restore(

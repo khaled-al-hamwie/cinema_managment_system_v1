@@ -55,11 +55,11 @@ export class UsersService {
     //     return { message: "avatar has been upload" };
     // }
 
-    // async remove(user: User) {
-    //     if (!user) throw new UserNotFoundException();
-    //     this.usersRepository.softRemove(user);
-    //     return { message: "user has been removed succsesfully" };
-    // }
+    async remove(user: User) {
+        if (!user) throw new UserNotFoundException();
+        this.usersRepository.softRemove(user);
+        return { message: "user has been removed succsesfully" };
+    }
 
     // async restore(user: User) {
     //     if (!user) throw new UserNotFoundException();
