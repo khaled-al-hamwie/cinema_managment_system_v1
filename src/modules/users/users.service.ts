@@ -1,11 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { compareSync, hashSync } from "bcrypt";
+import { hashSync } from "bcrypt";
 import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
-import { CredentailsDontMatchException } from "./exceptions/credentails-dont-match.exception";
 import { UserNameNotAllowedException } from "./exceptions/userNameNotAllowed.exception";
 import { UserNotFoundException } from "./exceptions/userNotFound.exception";
 import { UserPayloadInterface } from "./interfaces/user.payload.interface";
@@ -37,14 +36,8 @@ export class UsersService {
         return requiredUser;
     }
 
-    async update(
-        user: User | UserPayloadInterface,
-        updateUserDto: UpdateUserDto
-    ) {
-        const requiredUser = await this.findOne({
-            where: { user_id: user.user_id },
-        });
-        this.usersRepository.save({ ...requiredUser, ...updateUserDto });
+    async update(user: User, updateUserDto: UpdateUserDto) {
+        this.usersRepository.save({ ...user, ...updateUserDto });
         return { message: "user has been updated succsesfully" };
     }
 
@@ -67,25 +60,11 @@ export class UsersService {
     //     return { message: "user has been restored succsesfully" };
     // }
 
-    async validate(
-        user: User,
-        password: string
-    ): Promise<UserPayloadInterface> {
-        if (user && compareSync(password, user.password)) {
-            return {
-                user_id: user.user_id,
-                user_name: user.user_name,
-                is_admin: user.is_admin,
-            };
-        }
-        throw new CredentailsDontMatchException();
-    }
-
     userIsAdmin(user: User | UserPayloadInterface): boolean {
         return user.is_admin;
     }
 
-    private async checkUserWithSameUserName(user_name: string) {
+    async checkUserWithSameUserName(user_name: string) {
         const userWithSameUserName: User = await this.findOne({
             where: { user_name },
             withDeleted: true,

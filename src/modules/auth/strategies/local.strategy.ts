@@ -1,11 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-local";
+import { UsersValidateService } from "src/modules/users/services/users.validate.service";
 import { UsersService } from "src/modules/users/users.service";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, "local") {
-    constructor(private readonly usersService: UsersService) {
+    constructor(
+        private readonly usersService: UsersService,
+        private readonly usersValidateService: UsersValidateService
+    ) {
         super({
             usernameField: "user_name",
         });
@@ -17,7 +21,10 @@ export class LocalStrategy extends PassportStrategy(Strategy, "local") {
             },
             false
         );
-        const user = await this.usersService.validate(sendUser, password);
+        const user = await this.usersValidateService.validate(
+            sendUser,
+            password
+        );
         return user;
     }
 }

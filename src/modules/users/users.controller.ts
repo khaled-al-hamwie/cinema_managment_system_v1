@@ -9,26 +9,23 @@ import {
     Post,
     Put,
     Query,
-    UnauthorizedException,
     UploadedFile,
     UseGuards,
     UseInterceptors,
 } from "@nestjs/common";
 import { UserDecorator } from "src/core/decorators/user.decorator";
-import { IsNull, Not } from "typeorm";
 import { LoggedInGuard } from "../auth/guards/logged-in.guard";
 import { FindAllUserDto } from "./dto/findAll-user.dto";
-import { RestoreUserDto } from "./dto/restore-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
 import { UsersActions } from "./enums/users.actions.enum";
 import { UserNotFoundException } from "./exceptions/userNotFound.exception";
-import { UserUnauthorizedException } from "./exceptions/userUnauthorized.exception";
 import { UsersAbilityFactory } from "./factories/users-ability.factory";
 import { AvatarInterceptor } from "./interceptors/avatar.interceptor";
 import { UserPayloadInterface } from "./interfaces/user.payload.interface";
 import { UsersFindAllProvider } from "./providers/users-findAll.provider";
 import { UsersShowProfileProvider } from "./providers/users-showProfile.provider";
+import { UsersValidateService } from "./services/users.validate.service";
 import { UsersService } from "./users.service";
 
 @UseGuards(LoggedInGuard)
@@ -36,25 +33,25 @@ import { UsersService } from "./users.service";
 export class UsersController {
     constructor(
         private readonly usersService: UsersService,
-        private readonly usersAbilityFactory: UsersAbilityFactory,
+        private readonly usersValidateService: UsersValidateService,
         private readonly usersFindAllProvider: UsersFindAllProvider,
         private readonly usersShowProfileProvider: UsersShowProfileProvider
     ) {}
 
     @Get()
     async findAll(
-        @UserDecorator() user: User,
+        @UserDecorator() user: UserPayloadInterface,
         @Query() findAllUserDto: FindAllUserDto
     ) {
-        const ability = this.usersAbilityFactory.createForUser(user);
-        if (ability.can(UsersActions.SeeUsers, User)) {
-            const options =
-                this.usersFindAllProvider.GetOptions(findAllUserDto);
-            const users = await this.usersService.findAll(options);
-            if (users.length < 1) throw new UserNotFoundException();
-            return users;
-        }
-        throw new UserUnauthorizedException();
+        this.usersValidateService.checkAbility(
+            UsersActions.SeeUsers,
+            user,
+            User
+        );
+        const options = this.usersFindAllProvider.GetOptions(findAllUserDto);
+        const users = await this.usersService.findAll(options);
+        if (users.length < 1) throw new UserNotFoundException();
+        return users;
     }
     @Get("profile")
     async showProfile(@UserDecorator() user: UserPayloadInterface) {
@@ -68,23 +65,32 @@ export class UsersController {
         @UserDecorator() user: UserPayloadInterface,
         @Param("id", ParseIntPipe) user_id: number
     ) {
-        const ability = this.usersAbilityFactory.createForUser(user);
-        if (ability.can(UsersActions.SeeUsers, User)) {
-            const requiredUser = await this.usersService.findOne({
-                where: { user_id },
-            });
-            if (!requiredUser) throw new UserNotFoundException();
-            return requiredUser;
-        }
-        throw new UserUnauthorizedException();
+        this.usersValidateService.checkAbility(
+            UsersActions.SeeUsers,
+            user,
+            User
+        );
+        const requiredUser = await this.usersService.findOne({
+            where: { user_id },
+        });
+        if (!requiredUser) throw new UserNotFoundException();
+        return requiredUser;
     }
 
     @Patch()
-    update(
+    async update(
         @UserDecorator() user: UserPayloadInterface,
         @Body() updateUserDto: UpdateUserDto
     ) {
-        return this.usersService.update(user, updateUserDto);
+        const requiredUser = await this.usersService.findOne({
+            where: { user_id: user.user_id },
+        });
+        this.usersValidateService.checkAbility(
+            UsersActions.UpdateUser,
+            user,
+            requiredUser
+        );
+        return this.usersService.update(requiredUser, updateUserDto);
     }
 
     // @UseInterceptors(AvatarInterceptor)
@@ -97,10 +103,15 @@ export class UsersController {
     // }
 
     @Delete()
-    async remove(@UserDecorator("user_id") user_id: number) {
+    async remove(@UserDecorator() user: UserPayloadInterface) {
         const wantedUser = await this.usersService.findOne({
-            where: { user_id },
+            where: { user_id: user.user_id },
         });
+        this.usersValidateService.checkAbility(
+            UsersActions.DeleteUser,
+            user,
+            wantedUser
+        );
         return this.usersService.remove(wantedUser);
     }
 
@@ -127,22 +138,20 @@ export class UsersController {
     //     throw new UserNotFoundException();
     // }
 
-    // @Delete(":id")
-    // async block(
-    //     @UserDecorator() user: User,
-    //     @Param("id", ParseIntPipe) user_id: number,
-    // ) {
-    //     const ability = this.usersAbilityFactory.createForUser(user);
-    //     if (ability.cannot(Action.Delete, User))
-    //         throw new UnauthorizedException();
-    //     const wantedUser = await this.usersService.findOne({
-    //         where: { user_id },
-    //         relations: { role: true },
-    //     });
-    //     if (!wantedUser) throw new UserNotFoundException();
-    //     if (ability.can(Action.Delete, wantedUser)) {
-    //         return this.usersService.remove(wantedUser);
-    //     }
-    //     throw new UserNotFoundException();
-    // }
+    @Delete(":id")
+    async block(
+        @UserDecorator() user: UserPayloadInterface,
+        @Param("id", ParseIntPipe) user_id: number
+    ) {
+        this.usersValidateService.checkAbility(
+            UsersActions.BlockUser,
+            user,
+            User
+        );
+        const wantedUser = await this.usersService.findOne({
+            where: { user_id },
+        });
+        if (!wantedUser) throw new UserNotFoundException();
+        return this.usersService.remove(wantedUser);
+    }
 }
