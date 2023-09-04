@@ -16,7 +16,7 @@ export class Movie {
     @Column({ type: "varchar", length: 500 })
     story_line: string;
 
-    @Column({ type: "mediumint", unique: true })
+    @Column({ type: "mediumint" })
     duration: number;
 
     @Column({ type: "date" })
