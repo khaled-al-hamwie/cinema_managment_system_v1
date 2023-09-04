@@ -12,10 +12,14 @@ import {
     UseGuards,
     UseInterceptors,
 } from "@nestjs/common";
+import { UserDecorator } from "src/core/decorators/user.decorator";
 import { LoggedInGuard } from "../auth/guards/logged-in.guard";
+import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { FindAllMovieDto } from "./dto/findAll-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
+import { Movie } from "./entities/movie.entity";
+import { MoviesAction } from "./enums/movies.actions.enum";
 import { MovieNotFoundException } from "./exceptions/movie.not.found.exception";
 import { MoviesInterceptor } from "./interceptors/movies.interceptor";
 import { MoviesAssetsInterface } from "./interfaces/movies.assets.interface";
@@ -37,9 +41,11 @@ export class MoviesController {
     @Post()
     create(
         @Body() createMovieDto: CreateMovieDto,
+        @UserDecorator() user: UserPayloadInterface,
         @UploadedFiles(new CreateMoviesPipe())
         assets: MoviesAssetsInterface
     ) {
+        this.moviesService.checkAbility(MoviesAction.CreateMovie, user, Movie);
         createMovieDto.assets = assets;
         return this.moviesService.create(createMovieDto);
     }
@@ -62,13 +68,27 @@ export class MoviesController {
 
     @UseGuards(LoggedInGuard)
     @Patch(":id")
-    update(@Param("id") id: string, @Body() updateMovieDto: UpdateMovieDto) {
-        return this.moviesService.update(+id, updateMovieDto);
+    async update(
+        @Param("id", ParseIntPipe) movie_id: number,
+        @Body() updateMovieDto: UpdateMovieDto,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const movie = await this.moviesService.findOne({ where: { movie_id } });
+        if (!movie) throw new MovieNotFoundException();
+        this.moviesService.checkAbility(MoviesAction.UpdateMovie, user, movie);
+
+        return this.moviesService.update(movie, updateMovieDto);
     }
 
     @UseGuards(LoggedInGuard)
     @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.moviesService.remove(+id);
+    async remove(
+        @Param("id") movie_id: number,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const movie = await this.moviesService.findOne({ where: { movie_id } });
+        if (!movie) throw new MovieNotFoundException();
+        this.moviesService.checkAbility(MoviesAction.DeleteMovie, user, movie);
+        return this.moviesService.remove(movie);
     }
 }

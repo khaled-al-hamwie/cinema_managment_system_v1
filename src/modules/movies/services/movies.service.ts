@@ -1,16 +1,23 @@
+import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { User } from "src/modules/users/entities/user.entity";
+import { UserUnauthorizedException } from "src/modules/users/exceptions/userUnauthorized.exception";
+import { UserPayloadInterface } from "src/modules/users/interfaces/user.payload.interface";
 import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CreateMovieDto } from "../dto/create-movie.dto";
 import { UpdateMovieDto } from "../dto/update-movie.dto";
 import { Movie } from "../entities/movie.entity";
+import { MoviesAction } from "../enums/movies.actions.enum";
+import { MoviesAbilityFactory } from "../factories/movies.ability.factory";
 import { MoviesUploadAssetsService } from "./movies.upload.assets.service";
 
 @Injectable()
 export class MoviesService {
     constructor(
         @InjectRepository(Movie) private moviesRepository: Repository<Movie>,
-        private readonly moviesUploadService: MoviesUploadAssetsService
+        private readonly moviesUploadService: MoviesUploadAssetsService,
+        private readonly moviesAbilityProvider: MoviesAbilityFactory
     ) {}
     create(createMovieDto: CreateMovieDto) {
         const pathes = this.moviesUploadService.uploadAssets(
@@ -33,11 +40,23 @@ export class MoviesService {
         return this.moviesRepository.findOne(options);
     }
 
-    update(id: number, updateMovieDto: UpdateMovieDto) {
-        return `This action updates a #${id} movie`;
+    update(movie: Movie, updateMovieDto: UpdateMovieDto) {
+        this.moviesRepository.save({ ...movie, ...updateMovieDto });
+        return { message: "movie has been updated succsesfully" };
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} movie`;
+    remove(movie: Movie) {
+        this.moviesRepository.softRemove(movie);
+        return { message: "movie has been removed succsesfully" };
+    }
+
+    checkAbility(
+        action: MoviesAction,
+        user: UserPayloadInterface | User,
+        subject?: ExtractSubjectType<typeof Movie> | Movie
+    ) {
+        const ability = this.moviesAbilityProvider.createForUser(user);
+        if (ability.cannot(action, subject))
+            throw new UserUnauthorizedException();
     }
 }
