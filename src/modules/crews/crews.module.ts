@@ -18,5 +18,6 @@ import { CrewsFindOneProvider } from "./providers/crews.findOne.provider";
         CrewsFindOneProvider,
         CrewsFindAllProvider,
     ],
+    exports: [CrewsService],
 })
 export class CrewsModule {}

@@ -10,6 +10,7 @@ import { CreateCrewDto } from "./dto/create-crew.dto";
 import { UpdateCrewDto } from "./dto/update-crew.dto";
 import { Crew } from "./entities/crew.entity";
 import { CrewsActions } from "./enums/crews.actions.enum";
+import { CrewNotFoundException } from "./exceptions/crew.not.found.exception";
 import { CrewsAbilityFactory } from "./factories/crews.ability.factory";
 
 @Injectable()
@@ -33,6 +34,12 @@ export class CrewsService {
 
     findOne(options: FindOneOptions<Crew>) {
         return this.CrewRepositry.findOne(options);
+    }
+
+    findById(crew_id: number) {
+        const crew = this.findOne({ where: { crew_id } });
+        if (!crew) throw new CrewNotFoundException();
+        return crew;
     }
 
     update(crew: Crew, updateCrewDto: UpdateCrewDto) {
