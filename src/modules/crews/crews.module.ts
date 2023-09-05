@@ -6,10 +6,17 @@ import { CrewsController } from "./crews.controller";
 import { CrewsService } from "./crews.service";
 import { Crew } from "./entities/crew.entity";
 import { CrewsAbilityFactory } from "./factories/crews.ability.factory";
+import { CrewsFindAllProvider } from "./providers/crews.findAll.provider";
+import { CrewsFindOneProvider } from "./providers/crews.findOne.provider";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Crew]), UploadModule, UsersModule],
     controllers: [CrewsController],
-    providers: [CrewsService, CrewsAbilityFactory],
+    providers: [
+        CrewsService,
+        CrewsAbilityFactory,
+        CrewsFindOneProvider,
+        CrewsFindAllProvider,
+    ],
 })
 export class CrewsModule {}
