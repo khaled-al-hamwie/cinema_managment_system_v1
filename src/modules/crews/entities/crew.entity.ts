@@ -1,7 +1,9 @@
+import { CrewPosition } from "src/modules/crews-positions/entities/crews-position.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -27,4 +29,7 @@ export class Crew {
 
     @DeleteDateColumn()
     delted_at: Date;
+
+    @OneToMany(() => CrewPosition, (crew_position) => crew_position.crew)
+    crews_positions: CrewPosition[];
 }

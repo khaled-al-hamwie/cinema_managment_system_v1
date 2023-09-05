@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CrewPosition } from "src/modules/crews-positions/entities/crews-position.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Position {
@@ -10,4 +11,7 @@ export class Position {
 
     @Column({ type: "varchar", length: 250, nullable: true })
     description: string;
+
+    @OneToMany(() => CrewPosition, (crew_position) => crew_position.position)
+    crews_positions: CrewPosition[];
 }

@@ -8,6 +8,7 @@ import { UsersModule } from "./modules/users/users.module";
 import { MoviesModule } from './modules/movies/movies.module';
 import { PositionsModule } from './modules/positions/positions.module';
 import { CrewsModule } from './modules/crews/crews.module';
+import { CrewsPositionsModule } from './modules/crews-positions/crews-positions.module';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { CrewsModule } from './modules/crews/crews.module';
         MoviesModule,
         PositionsModule,
         CrewsModule,
+        CrewsPositionsModule,
     ],
 })
 export class AppModule {}
