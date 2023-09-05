@@ -13,6 +13,12 @@ export class FindAllCrewDto {
     @IsOptional()
     @Transform(({ value }) => Number(value))
     @IsInt()
+    @Min(1)
+    position_id: number;
+
+    @IsOptional()
+    @Transform(({ value }) => Number(value))
+    @IsInt()
     @Min(0)
     page: number;
 }
