@@ -1,7 +1,9 @@
+import { Role } from "src/modules/roles/entities/role.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -33,4 +35,7 @@ export class Movie {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => Role, (role) => role.movie)
+    roles: Role[];
 }

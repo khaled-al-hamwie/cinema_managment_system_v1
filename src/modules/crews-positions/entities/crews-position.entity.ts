@@ -1,6 +1,13 @@
 import { Crew } from "src/modules/crews/entities/crew.entity";
 import { Position } from "src/modules/positions/entities/position.entity";
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "src/modules/roles/entities/role.entity";
+import {
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class CrewPosition {
@@ -16,4 +23,7 @@ export class CrewPosition {
     })
     @JoinColumn({ name: "position_id" })
     position: Position;
+
+    @OneToMany(() => Role, (role) => role.crew_position)
+    roles: Role[];
 }
