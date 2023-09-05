@@ -19,6 +19,7 @@ import { CreateCrewDto } from "./dto/create-crew.dto";
 import { UpdateCrewDto } from "./dto/update-crew.dto";
 import { Crew } from "./entities/crew.entity";
 import { CrewsActions } from "./enums/crews.actions.enum";
+import { CrewNotFoundException } from "./exceptions/crew.not.found.exception";
 import { CrewsInterceptor } from "./interceptors/crews.interceptor";
 import { CrewsPipe } from "./pipes/crews.pipe";
 
@@ -51,22 +52,26 @@ export class CrewsController {
 
     @UseGuards(LoggedInGuard)
     @Patch(":id")
-    update(
+    async update(
         @Param("id", ParseIntPipe) crew_id: number,
         @Body() updateCrewDto: UpdateCrewDto,
         @UserDecorator() user: UserPayloadInterface
     ) {
-        this.crewsService.checkAbility(CrewsActions.UpdateCrew, user, Crew);
-        return this.crewsService.update(+1, updateCrewDto);
+        const crew = await this.crewsService.findOne({ where: { crew_id } });
+        if (!crew) throw new CrewNotFoundException();
+        this.crewsService.checkAbility(CrewsActions.UpdateCrew, user, crew);
+        return this.crewsService.update(crew, updateCrewDto);
     }
 
     @UseGuards(LoggedInGuard)
     @Delete(":id")
-    remove(
+    async remove(
         @Param("id", ParseIntPipe) crew_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
-        this.crewsService.checkAbility(CrewsActions.DeleteCrew, user, Crew);
-        return this.crewsService.remove(+1);
+        const crew = await this.crewsService.findOne({ where: { crew_id } });
+        if (!crew) throw new CrewNotFoundException();
+        this.crewsService.checkAbility(CrewsActions.DeleteCrew, user, crew);
+        return this.crewsService.remove(crew);
     }
 }

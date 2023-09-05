@@ -35,12 +35,14 @@ export class CrewsService {
         return this.CrewRepositry.findOne(options);
     }
 
-    update(id: number, updateCrewDto: UpdateCrewDto) {
-        return `This action updates a #${id} crew`;
+    update(crew: Crew, updateCrewDto: UpdateCrewDto) {
+        this.CrewRepositry.save({ ...crew, ...updateCrewDto });
+        return { message: "crew has been updated succsesfully" };
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} crew`;
+    remove(crew: Crew) {
+        this.CrewRepositry.softRemove(crew);
+        return { message: "movie has been removed succsesfully" };
     }
 
     checkAbility(
