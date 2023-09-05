@@ -7,7 +7,6 @@ import { UserPayloadInterface } from "../users/interfaces/user.payload.interface
 import { CrewsPositionsService } from "./crews-positions.service";
 import { CrewsPositionDto } from "./dto/create-crews-position.dto";
 import { CrewsPosotionsActions } from "./enums/crews-positions.actions.enum";
-import { CrewPositionNotFoundException } from "./exceptions/crew-position.not.found.exception";
 
 @Controller("crews-positions")
 export class CrewsPositionsController {
@@ -36,24 +35,18 @@ export class CrewsPositionsController {
 
     @Delete()
     async remove(
-        @Body() crewsPositionDto: CrewsPositionDto,
+        @Body() { crew_id, position_id }: CrewsPositionDto,
         @UserDecorator() user: UserPayloadInterface
     ) {
         this.crewsPositionsService.checkAbility(
             CrewsPosotionsActions.DeleteCrewPosotion,
             user
         );
-        const crew = await this.crewsService.findById(crewsPositionDto.crew_id);
-        const position = await this.positionsService.findById(
-            crewsPositionDto.position_id
-        );
-        const crewPosition = await this.crewsPositionsService.findOne({
-            where: {
-                crew,
-                position,
-            },
-        });
-        if (!crewPosition) throw new CrewPositionNotFoundException();
+        const crewPosition =
+            await this.crewsPositionsService.findByCrewAndPosition(
+                crew_id,
+                position_id
+            );
         return this.crewsPositionsService.remove(crewPosition);
     }
 }
