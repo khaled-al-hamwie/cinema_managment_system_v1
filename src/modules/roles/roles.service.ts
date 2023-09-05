@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindOneOptions, Repository } from "typeorm";
+import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CrewPosition } from "../crews-positions/entities/crews-position.entity";
 import { Movie } from "../movies/entities/movie.entity";
 import { User } from "../users/entities/user.entity";
@@ -29,7 +29,9 @@ export class RolesService {
         this.roleReppository.save(role);
         return role;
     }
-
+    findAll(opitons: FindManyOptions<Role>) {
+        return this.roleReppository.find(opitons);
+    }
     findOne(options: FindOneOptions<Role>) {
         return this.roleReppository.findOne(options);
     }

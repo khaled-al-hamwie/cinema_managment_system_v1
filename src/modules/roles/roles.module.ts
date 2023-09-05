@@ -5,6 +5,7 @@ import { MoviesModule } from "../movies/movies.module";
 import { UsersModule } from "../users/users.module";
 import { Role } from "./entities/role.entity";
 import { RolesAbilityFactory } from "./factories/roles.ability.factory";
+import { RolesGetProvider } from "./providers/roles.get.provider";
 import { RolesController } from "./roles.controller";
 import { RolesService } from "./roles.service";
 
@@ -16,6 +17,6 @@ import { RolesService } from "./roles.service";
         MoviesModule,
     ],
     controllers: [RolesController],
-    providers: [RolesService, RolesAbilityFactory],
+    providers: [RolesService, RolesAbilityFactory, RolesGetProvider],
 })
 export class RolesModule {}
