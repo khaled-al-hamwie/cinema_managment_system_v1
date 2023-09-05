@@ -19,5 +19,6 @@ import { MoviesUploadAssetsService } from "./services/movies.upload.assets.servi
         MoviesFindOneProvider,
         MoviesAbilityFactory,
     ],
+    exports: [MoviesService],
 })
 export class MoviesModule {}

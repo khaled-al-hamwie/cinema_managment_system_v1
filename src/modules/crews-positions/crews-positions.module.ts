@@ -17,5 +17,6 @@ import { CrewsPosotionsAbilityFactory } from "./factories/crews-positions.abilit
     ],
     controllers: [CrewsPositionsController],
     providers: [CrewsPositionsService, CrewsPosotionsAbilityFactory],
+    exports: [CrewsPositionsService],
 })
 export class CrewsPositionsModule {}
