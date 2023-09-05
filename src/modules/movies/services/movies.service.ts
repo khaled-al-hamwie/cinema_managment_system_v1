@@ -9,6 +9,7 @@ import { CreateMovieDto } from "../dto/create-movie.dto";
 import { UpdateMovieDto } from "../dto/update-movie.dto";
 import { Movie } from "../entities/movie.entity";
 import { MoviesAction } from "../enums/movies.actions.enum";
+import { MovieNotFoundException } from "../exceptions/movie.not.found.exception";
 import { MoviesAbilityFactory } from "../factories/movies.ability.factory";
 import { MoviesUploadAssetsService } from "./movies.upload.assets.service";
 
@@ -38,6 +39,12 @@ export class MoviesService {
 
     findOne(options: FindOneOptions<Movie>) {
         return this.moviesRepository.findOne(options);
+    }
+
+    async findById(movie_id: number) {
+        const movie = await this.findOne({ where: { movie_id } });
+        if (!movie) throw new MovieNotFoundException();
+        return movie;
     }
 
     update(movie: Movie, updateMovieDto: UpdateMovieDto) {

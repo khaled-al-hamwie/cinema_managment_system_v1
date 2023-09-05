@@ -31,7 +31,7 @@ export class CrewsPositionsService {
         const crewPosition = this.crewPositionReppository.create();
         crewPosition.crew = crew;
         crewPosition.position = position;
-        this.crewPositionReppository.save(crewPosition);
+        await this.crewPositionReppository.save(crewPosition);
         return crewPosition;
     }
 
@@ -52,8 +52,21 @@ export class CrewsPositionsService {
         return crewPosition;
     }
 
+    async findCrewPositionOrCreate(crew_id: number, position_id: number) {
+        const crew = await this.crewsService.findById(crew_id);
+        const position = await this.positionsService.findById(position_id);
+        const crewPosition = await this.findOne({
+            where: {
+                crew,
+                position,
+            },
+        });
+        if (!crewPosition) return await this.create(crew, position);
+        return crewPosition;
+    }
+
     remove(crewPosition: CrewPosition) {
-        this.crewPositionReppository.remove(crewPosition);
+        this.crewPositionReppository.softRemove(crewPosition);
         return {
             message: "the posotion has been removed from the crew succsesfully",
         };

@@ -36,8 +36,8 @@ export class CrewsService {
         return this.CrewRepositry.findOne(options);
     }
 
-    findById(crew_id: number) {
-        const crew = this.findOne({ where: { crew_id } });
+    async findById(crew_id: number) {
+        const crew = await this.findOne({ where: { crew_id } });
         if (!crew) throw new CrewNotFoundException();
         return crew;
     }
