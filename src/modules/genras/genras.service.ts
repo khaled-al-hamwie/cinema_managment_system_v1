@@ -1,7 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindOneOptions, Repository } from "typeorm";
+import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
@@ -10,6 +10,7 @@ import { UpdateGenraDto } from "./dto/update-genra.dto";
 import { Genra } from "./entities/genra.entity";
 import { GenrasActions } from "./enums/genras.actions.enum";
 import { GenraNotAllowedException } from "./exceptions/genra.not.allowed.exception";
+import { GenraNotFoundException } from "./exceptions/genra.not.found.exception";
 import { GenrasAbilityFactory } from "./factories/genras.ability.factory";
 
 @Injectable()
@@ -29,20 +30,27 @@ export class GenrasService {
         return genra;
     }
 
-    findAll() {
-        return `This action returns all genras`;
+    findAll(options: FindManyOptions<Genra>) {
+        return this.genraRepository.find(options);
     }
 
     findOne(options: FindOneOptions<Genra>) {
         return this.genraRepository.findOne(options);
     }
-
-    update(id: number, updateGenraDto: UpdateGenraDto) {
-        return `This action updates a #${id} genra`;
+    async findById(genra_id: number) {
+        const genra = await this.findOne({ where: { genra_id } });
+        if (!genra) throw new GenraNotFoundException();
+        return genra;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} genra`;
+    update(genra: Genra, updateGenraDto: UpdateGenraDto) {
+        this.genraRepository.save({ ...genra, ...updateGenraDto });
+        return { message: "genra has been updated succsesfully" };
+    }
+
+    remove(genra: Genra) {
+        this.genraRepository.softRemove(genra);
+        return { message: "genra has been deleted succsesfully" };
     }
 
     checkAbility(

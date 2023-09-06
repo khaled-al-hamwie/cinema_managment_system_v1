@@ -4,6 +4,7 @@ import {
     Delete,
     Get,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
     UseGuards,
@@ -33,23 +34,27 @@ export class GenrasController {
 
     @Get()
     findAll() {
-        return this.genrasService.findAll();
+        return this.genrasService.findAll({});
     }
 
     @Patch(":id")
-    update(
-        @Param("id") id: string,
+    async update(
+        @Param("id", ParseIntPipe) genra_id: number,
         @Body() updateGenraDto: UpdateGenraDto,
         @UserDecorator() user: UserPayloadInterface
     ) {
-        return this.genrasService.update(+id, updateGenraDto);
+        const genra = await this.genrasService.findById(genra_id);
+        this.genrasService.checkAbility(GenrasActions.UpdateGenra, user, genra);
+        return this.genrasService.update(genra, updateGenraDto);
     }
 
     @Delete(":id")
-    remove(
-        @Param("id") id: string,
+    async remove(
+        @Param("id", ParseIntPipe) genra_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
-        return this.genrasService.remove(+id);
+        const genra = await this.genrasService.findById(genra_id);
+        this.genrasService.checkAbility(GenrasActions.UpdateGenra, user, genra);
+        return this.genrasService.remove(genra);
     }
 }
