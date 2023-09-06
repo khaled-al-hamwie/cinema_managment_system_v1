@@ -32,8 +32,9 @@ export class MoviesGenrasService {
         return this.movieGenraRepository.findOne(options);
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} moviesGenra`;
+    remove(movie_genra: MovieGenra) {
+        this.movieGenraRepository.remove(movie_genra);
+        return { message: "the genra has been removed succsesfully" };
     }
 
     checkAbility(
