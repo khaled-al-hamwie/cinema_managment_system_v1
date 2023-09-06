@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    DeleteDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Genra {
@@ -10,4 +15,7 @@ export class Genra {
 
     @Column({ type: "varchar", length: 250, nullable: true })
     description: string;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 }
