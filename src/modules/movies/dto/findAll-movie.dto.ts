@@ -26,6 +26,12 @@ export class FindAllMovieDto {
     @Transform(({ value }) => Number(value))
     @IsInt()
     @Min(0)
+    genra_id: number;
+
+    @IsOptional()
+    @Transform(({ value }) => Number(value))
+    @IsInt()
+    @Min(0)
     page: number;
 
     @IsOptional()

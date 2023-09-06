@@ -54,6 +54,7 @@ export class MoviesFindAllProvider {
         title,
         publish_after,
         publish_before,
+        genra_id,
     }: FindAllMovieDto): FindOptionsWhere<Movie> | FindOptionsWhere<Movie>[] {
         const where: FindOptionsWhere<Movie> | FindOptionsWhere<Movie>[] = {};
         if (title) where["title"] = Like(`%${title}%`);
@@ -66,6 +67,7 @@ export class MoviesFindAllProvider {
                 LessThanOrEqual(new Date(publish_before)),
                 MoreThanOrEqual(new Date(publish_after))
             );
+        if (genra_id) where["movies_genras"] = { genra: { genra_id } };
         return where;
     }
 }
