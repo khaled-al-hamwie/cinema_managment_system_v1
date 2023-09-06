@@ -28,6 +28,10 @@ export class MoviesFindOneProvider {
             cover_pic: true,
             trailer: true,
             movie: true,
+            movies_genras: {
+                movie_genra_id: true,
+                genra: { genra_id: true, title: true, description: true },
+            },
         };
     }
 
@@ -40,6 +44,6 @@ export class MoviesFindOneProvider {
     }
 
     private GetRelations(): FindOptionsRelations<Movie> {
-        return {};
+        return { movies_genras: { genra: true } };
     }
 }
