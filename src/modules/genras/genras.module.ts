@@ -10,5 +10,6 @@ import { GenrasService } from "./genras.service";
     imports: [TypeOrmModule.forFeature([Genra]), UsersModule],
     controllers: [GenrasController],
     providers: [GenrasService, GenrasAbilityFactory],
+    exports: [GenrasService],
 })
 export class GenrasModule {}
