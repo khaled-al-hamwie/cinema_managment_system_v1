@@ -11,6 +11,7 @@ import { CrewsModule } from './modules/crews/crews.module';
 import { CrewsPositionsModule } from './modules/crews-positions/crews-positions.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { GenrasModule } from './modules/genras/genras.module';
+import { MoviesGenrasModule } from './modules/movies-genras/movies-genras.module';
 
 @Module({
     imports: [
@@ -26,6 +27,7 @@ import { GenrasModule } from './modules/genras/genras.module';
         CrewsPositionsModule,
         RolesModule,
         GenrasModule,
+        MoviesGenrasModule,
     ],
 })
 export class AppModule {}
