@@ -4,14 +4,14 @@ import { DatabaseModule } from "./core/database/database.module";
 import { SessionsModule } from "./core/sessions/sessions.module";
 import { UploadModule } from "./core/uploads/upload.module";
 import { AuthModule } from "./modules/auth/auth.module";
+import { CrewsPositionsModule } from "./modules/crews-positions/crews-positions.module";
+import { CrewsModule } from "./modules/crews/crews.module";
+import { GenrasModule } from "./modules/genras/genras.module";
+import { MoviesGenrasModule } from "./modules/movies-genras/movies-genras.module";
+import { MoviesModule } from "./modules/movies/movies.module";
+import { PositionsModule } from "./modules/positions/positions.module";
+import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
-import { MoviesModule } from './modules/movies/movies.module';
-import { PositionsModule } from './modules/positions/positions.module';
-import { CrewsModule } from './modules/crews/crews.module';
-import { CrewsPositionsModule } from './modules/crews-positions/crews-positions.module';
-import { RolesModule } from './modules/roles/roles.module';
-import { GenrasModule } from './modules/genras/genras.module';
-import { MoviesGenrasModule } from './modules/movies-genras/movies-genras.module';
 
 @Module({
     imports: [

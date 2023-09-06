@@ -1,7 +1,9 @@
+import { MovieGenra } from "src/modules/movies-genras/entities/movies-genra.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -18,4 +20,7 @@ export class Genra {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => MovieGenra, (movie_genra) => movie_genra.genra)
+    movies_genras: MovieGenra[];
 }

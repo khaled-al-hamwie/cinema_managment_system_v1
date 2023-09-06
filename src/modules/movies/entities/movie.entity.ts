@@ -1,3 +1,4 @@
+import { MovieGenra } from "src/modules/movies-genras/entities/movies-genra.entity";
 import { Role } from "src/modules/roles/entities/role.entity";
 import {
     Column,
@@ -38,4 +39,7 @@ export class Movie {
 
     @OneToMany(() => Role, (role) => role.movie)
     roles: Role[];
+
+    @OneToMany(() => MovieGenra, (movie_genra) => movie_genra.movie)
+    movies_genras: MovieGenra[];
 }
