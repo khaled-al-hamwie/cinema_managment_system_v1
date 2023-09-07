@@ -12,6 +12,7 @@ import { MoviesModule } from "./modules/movies/movies.module";
 import { PositionsModule } from "./modules/positions/positions.module";
 import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
+import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import { UsersModule } from "./modules/users/users.module";
         RolesModule,
         GenrasModule,
         MoviesGenrasModule,
+        WatchListsModule,
     ],
 })
 export class AppModule {}
