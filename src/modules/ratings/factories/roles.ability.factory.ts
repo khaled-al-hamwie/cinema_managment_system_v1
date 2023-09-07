@@ -17,11 +17,15 @@ export class RatingsAbilityFactory {
         if (this.usersService.userIsAdmin(user)) {
             cannot(RatingsActions.CreateRating, Rating);
             cannot(RatingsActions.UpdateRating, Rating);
-            cannot(RatingsActions.DeleteRating, Rating);
+            can(RatingsActions.DeleteRating, Rating);
         } else {
             can(RatingsActions.CreateRating, Rating);
-            can(RatingsActions.UpdateRating, Rating);
-            can(RatingsActions.DeleteRating, Rating);
+            can(RatingsActions.UpdateRating, Rating, {
+                "user.user_id": user.user_id,
+            } as any);
+            can(RatingsActions.DeleteRating, Rating, {
+                "user.user_id": user.user_id,
+            } as any);
         }
         return build({
             detectSubjectType: (item) =>
