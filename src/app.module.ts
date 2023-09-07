@@ -13,6 +13,7 @@ import { PositionsModule } from "./modules/positions/positions.module";
 import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
 import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
+import { RatingsModule } from './modules/ratings/ratings.module';
 
 @Module({
     imports: [
@@ -30,6 +31,7 @@ import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
         GenrasModule,
         MoviesGenrasModule,
         WatchListsModule,
+        RatingsModule,
     ],
 })
 export class AppModule {}
