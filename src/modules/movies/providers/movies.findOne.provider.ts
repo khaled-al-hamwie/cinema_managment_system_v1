@@ -44,6 +44,6 @@ export class MoviesFindOneProvider {
     }
 
     private GetRelations(): FindOptionsRelations<Movie> {
-        return { movies_genras: { genra: true } };
+        return { movies_genras: { genra: true }, ratings: true };
     }
 }

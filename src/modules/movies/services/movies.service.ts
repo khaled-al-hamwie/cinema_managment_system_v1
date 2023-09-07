@@ -1,6 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { User } from "src/modules/users/entities/user.entity";
 import { UserUnauthorizedException } from "src/modules/users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "src/modules/users/interfaces/user.payload.interface";
@@ -39,6 +40,15 @@ export class MoviesService {
 
     findOne(options: FindOneOptions<Movie>) {
         return this.moviesRepository.findOne(options);
+    }
+
+    getRatings(ratings: Rating[]) {
+        if (ratings.length < 1) return 0;
+        const sum = ratings.reduce(
+            (acc, obj) => Number(acc) + Number(obj.rating),
+            0
+        );
+        return sum / ratings.length;
     }
 
     async findById(movie_id: number) {

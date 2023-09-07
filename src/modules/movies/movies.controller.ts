@@ -63,7 +63,12 @@ export class MoviesController {
         const options = this.moviesFindOneProvider.GetOption(movie_id);
         const movie = await this.moviesService.findOne(options);
         if (!movie) throw new MovieNotFoundException();
-        return movie;
+        const rating = this.moviesService.getRatings(movie.ratings);
+        delete movie.ratings;
+        return {
+            ...movie,
+            rating,
+        };
     }
 
     @UseGuards(LoggedInGuard)
