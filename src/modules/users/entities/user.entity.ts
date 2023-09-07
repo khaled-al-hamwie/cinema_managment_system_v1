@@ -1,3 +1,4 @@
+import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
     Column,
@@ -41,4 +42,7 @@ export class User {
 
     @OneToMany(() => WatchList, (watch_list) => watch_list.user)
     watch_lists: WatchList[];
+
+    @OneToMany(() => Rating, (rating) => rating.user)
+    ratings: Rating[];
 }

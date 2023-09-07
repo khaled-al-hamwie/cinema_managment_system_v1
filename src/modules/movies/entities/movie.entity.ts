@@ -1,4 +1,5 @@
 import { MovieGenra } from "src/modules/movies-genras/entities/movies-genra.entity";
+import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { Role } from "src/modules/roles/entities/role.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
@@ -46,4 +47,7 @@ export class Movie {
 
     @OneToMany(() => WatchList, (watch_list) => watch_list.movie)
     watch_lists: WatchList[];
+
+    @OneToMany(() => Rating, (rating) => rating.movie)
+    ratings: Rating[];
 }
