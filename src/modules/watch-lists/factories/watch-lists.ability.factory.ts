@@ -16,9 +16,11 @@ export class WatchListsAbilityFactory {
         const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
         if (this.usersService.userIsAdmin(user)) {
             cannot(WatchListsAction.PutInWatchList, WatchList);
+            can(WatchListsAction.SeeWatchList, WatchList);
             cannot(WatchListsAction.RemoveFromWatchList, WatchList);
         } else {
             can(WatchListsAction.PutInWatchList, WatchList);
+            can(WatchListsAction.SeeWatchList, WatchList);
             can(WatchListsAction.RemoveFromWatchList, WatchList);
         }
         return build({
