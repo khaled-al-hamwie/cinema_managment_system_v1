@@ -69,8 +69,8 @@ export class WatchListsController {
     }
 
     @Delete(":id")
-    remove(
-        @Param("id", ParseIntPipe) watch_list_id: number,
+    async remove(
+        @Param("id", ParseIntPipe) movie_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
         this.watchListsService.checkAbility(
@@ -78,6 +78,10 @@ export class WatchListsController {
             user,
             WatchList
         );
-        return this.watchListsService.remove(+watch_list_id);
+        const watch_list = await this.watchListsService.findOne({
+            where: { movie: { movie_id }, user },
+        });
+        if (!watch_list) throw new WatchListNotFoundException();
+        return this.watchListsService.remove(watch_list);
     }
 }

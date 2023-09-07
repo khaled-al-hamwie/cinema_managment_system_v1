@@ -31,8 +31,9 @@ export class WatchListsService {
         return this.watchListRepository.findOne(options);
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} watchList`;
+    remove(watch_list: WatchList) {
+        this.watchListRepository.remove(watch_list);
+        return { message: "movie has been removed from you watch list" };
     }
 
     checkAbility(
