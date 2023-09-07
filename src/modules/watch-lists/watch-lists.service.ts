@@ -6,7 +6,6 @@ import { Movie } from "../movies/entities/movie.entity";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
-import { CreateWatchListDto } from "./dto/create-watch-list.dto";
 import { WatchList } from "./entities/watch-list.entity";
 import { WatchListsAction } from "./enums/watch-lists.actions.enum";
 import { MovieAlreadyExistInWatchListException } from "./exceptions/movie.already.exist.in.watch.list.exception";
@@ -26,10 +25,6 @@ export class WatchListsService {
         watch_list.movie = movie;
         this.watchListRepository.save(watch_list);
         return watch_list;
-    }
-
-    findAll() {
-        return `This action returns all watchLists`;
     }
 
     findOne(options: FindOneOptions<WatchList>) {

@@ -1,4 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import { User } from "src/modules/users/entities/user.entity";
+import { UserPayloadInterface } from "src/modules/users/interfaces/user.payload.interface";
 import {
     And,
     FindManyOptions,
@@ -15,11 +17,14 @@ import { Movie } from "../entities/movie.entity";
 @Injectable()
 export class MoviesFindAllProvider {
     private PageLength = 20;
-    GetOption(findAllMovieDto: FindAllMovieDto): FindManyOptions<Movie> {
+    GetOption(
+        findAllMovieDto: FindAllMovieDto,
+        user?: User | UserPayloadInterface
+    ): FindManyOptions<Movie> {
         const options: FindManyOptions<Movie> = {};
         options.select = this.GetSelect();
         options.order = this.GetOrder(findAllMovieDto);
-        options.where = this.GetWhere(findAllMovieDto);
+        options.where = this.GetWhere(findAllMovieDto, user);
         options.take = this.PageLength;
         options.skip = findAllMovieDto.page
             ? findAllMovieDto.page * this.PageLength
@@ -50,12 +55,10 @@ export class MoviesFindAllProvider {
         };
     }
 
-    GetWhere({
-        title,
-        publish_after,
-        publish_before,
-        genra_id,
-    }: FindAllMovieDto): FindOptionsWhere<Movie> | FindOptionsWhere<Movie>[] {
+    GetWhere(
+        { title, publish_after, publish_before, genra_id }: FindAllMovieDto,
+        user?: User | UserPayloadInterface
+    ): FindOptionsWhere<Movie> | FindOptionsWhere<Movie>[] {
         const where: FindOptionsWhere<Movie> | FindOptionsWhere<Movie>[] = {};
         if (title) where["title"] = Like(`%${title}%`);
         if (publish_before)
@@ -68,6 +71,7 @@ export class MoviesFindAllProvider {
                 MoreThanOrEqual(new Date(publish_after))
             );
         if (genra_id) where["movies_genras"] = { genra: { genra_id } };
+        if (user) where["watch_lists"] = { user };
         return where;
     }
 }
