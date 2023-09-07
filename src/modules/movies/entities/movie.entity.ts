@@ -1,5 +1,6 @@
 import { MovieGenra } from "src/modules/movies-genras/entities/movies-genra.entity";
 import { Role } from "src/modules/roles/entities/role.entity";
+import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
     Column,
     DeleteDateColumn,
@@ -42,4 +43,7 @@ export class Movie {
 
     @OneToMany(() => MovieGenra, (movie_genra) => movie_genra.movie)
     movies_genras: MovieGenra[];
+
+    @OneToMany(() => WatchList, (watch_list) => watch_list.movie)
+    watch_lists: WatchList[];
 }

@@ -1,7 +1,9 @@
+import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -36,4 +38,7 @@ export class User {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => WatchList, (watch_list) => watch_list.user)
+    watch_lists: WatchList[];
 }
