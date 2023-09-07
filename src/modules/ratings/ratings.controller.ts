@@ -4,6 +4,7 @@ import {
     Delete,
     Get,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
     UseGuards,
@@ -54,8 +55,18 @@ export class RatingsController {
 
     @UseGuards(LoggedInGuard)
     @Patch(":id")
-    update(@Param("id") id: string, @Body() updateRatingDto: UpdateRatingDto) {
-        return this.ratingsService.update(+id, updateRatingDto);
+    async update(
+        @Param("id", ParseIntPipe) rating_id: number,
+        @Body() updateRatingDto: UpdateRatingDto,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const rating = await this.ratingsService.findById(rating_id);
+        this.ratingsService.checkAbility(
+            RatingsActions.UpdateRating,
+            user,
+            rating
+        );
+        return this.ratingsService.update(rating, updateRatingDto);
     }
 
     @UseGuards(LoggedInGuard)

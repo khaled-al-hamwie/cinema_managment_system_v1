@@ -11,7 +11,8 @@ import { UpdateRatingDto } from "./dto/update-rating.dto";
 import { Rating } from "./entities/rating.entity";
 import { RatingsActions } from "./enums/ratings.actions.enum";
 import { RatingAlreadyExistException } from "./exceptions/rating.already.exist.exception";
-import { RatingsAbilityFactory } from "./factories/roles.ability.factory";
+import { RatingNotFoundException } from "./exceptions/rating.not.found.exception";
+import { RatingsAbilityFactory } from "./factories/ratings.ability.factory";
 
 @Injectable()
 export class RatingsService {
@@ -36,9 +37,18 @@ export class RatingsService {
     findOne(options: FindOneOptions<Rating>) {
         return this.ratingsRepository.findOne(options);
     }
+    async findById(rating_id: number): Promise<Rating> {
+        const rating = await this.findOne({
+            where: { rating_id },
+            relations: { user: true },
+        });
+        if (!rating) throw new RatingNotFoundException();
+        return rating;
+    }
 
-    update(id: number, updateRatingDto: UpdateRatingDto) {
-        return `This action updates a #${id} rating`;
+    update(rating: Rating, updateRatingDto: UpdateRatingDto) {
+        this.ratingsRepository.save({ ...rating, ...updateRatingDto });
+        return { message: "rating has been updated succsesfully" };
     }
 
     remove(id: number) {
