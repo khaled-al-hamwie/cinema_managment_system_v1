@@ -71,7 +71,16 @@ export class RatingsController {
 
     @UseGuards(LoggedInGuard)
     @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.ratingsService.remove(+id);
+    async remove(
+        @Param("id", ParseIntPipe) rating_id: number,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const rating = await this.ratingsService.findById(rating_id);
+        this.ratingsService.checkAbility(
+            RatingsActions.DeleteRating,
+            user,
+            rating
+        );
+        return this.ratingsService.remove(rating);
     }
 }

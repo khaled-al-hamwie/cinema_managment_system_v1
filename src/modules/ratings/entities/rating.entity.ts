@@ -2,6 +2,8 @@ import { Movie } from "src/modules/movies/entities/movie.entity";
 import { User } from "src/modules/users/entities/user.entity";
 import {
     Column,
+    CreateDateColumn,
+    DeleteDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
@@ -22,6 +24,12 @@ export class Rating {
         nullable: true,
     })
     comment: string;
+
+    @CreateDateColumn()
+    created_at: Date;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 
     @ManyToOne(() => User, (user) => user.ratings)
     @JoinColumn({ name: "user_id" })

@@ -51,8 +51,9 @@ export class RatingsService {
         return { message: "rating has been updated succsesfully" };
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} rating`;
+    remove(rating: Rating) {
+        this.ratingsRepository.softRemove(rating);
+        return { message: "rating has been removed succsesfully" };
     }
 
     checkAbility(
