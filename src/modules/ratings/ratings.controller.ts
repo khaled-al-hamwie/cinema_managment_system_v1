@@ -7,24 +7,27 @@ import {
     ParseIntPipe,
     Patch,
     Post,
+    Query,
     UseGuards,
 } from "@nestjs/common";
 import { UserDecorator } from "src/core/decorators/user.decorator";
 import { LoggedInGuard } from "../auth/guards/logged-in.guard";
 import { MoviesService } from "../movies/services/movies.service";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
-import { UsersService } from "../users/users.service";
 import { CreateRatingDto } from "./dto/create-rating.dto";
+import { FindAllRatingDto } from "./dto/findAll-rating.dto";
 import { UpdateRatingDto } from "./dto/update-rating.dto";
 import { Rating } from "./entities/rating.entity";
 import { RatingsActions } from "./enums/ratings.actions.enum";
+import { RatingNotFoundException } from "./exceptions/rating.not.found.exception";
+import { RatingsFindAllProvider } from "./providers/ratings.findAll.provider";
 import { RatingsService } from "./ratings.service";
 
 @Controller("ratings")
 export class RatingsController {
     constructor(
         private readonly ratingsService: RatingsService,
-        private readonly usersService: UsersService,
+        private readonly ratingsFindAllProvider: RatingsFindAllProvider,
         private readonly moviesService: MoviesService
     ) {}
 
@@ -48,9 +51,18 @@ export class RatingsController {
         return this.ratingsService.create(createRatingDto);
     }
 
-    @Get()
-    findAll() {
-        return this.ratingsService.findAll();
+    @Get(":id")
+    async findAll(
+        @Param("id", ParseIntPipe) movie_id: number,
+        @Query() findAllRatingDto: FindAllRatingDto
+    ) {
+        const options = this.ratingsFindAllProvider.GetOption(
+            findAllRatingDto,
+            movie_id
+        );
+        const ratings = await this.ratingsService.findAll(options);
+        if (ratings.length < 1) throw new RatingNotFoundException();
+        return ratings;
     }
 
     @UseGuards(LoggedInGuard)

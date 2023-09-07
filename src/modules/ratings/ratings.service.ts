@@ -1,7 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindOneOptions, Repository } from "typeorm";
+import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { Movie } from "../movies/entities/movie.entity";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
@@ -30,8 +30,8 @@ export class RatingsService {
         return rating;
     }
 
-    findAll() {
-        return `This action returns all ratings`;
+    findAll(options: FindManyOptions<Rating>) {
+        return this.ratingsRepository.find(options);
     }
 
     findOne(options: FindOneOptions<Rating>) {
