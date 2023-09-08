@@ -18,19 +18,28 @@ export class ReactionsService {
         private readonly reactionsAbilityProvider: ReactionsAbilityFactory
     ) {}
     create(createReactionDto: CreateReactionDto) {
-        return "This action adds a new reaction";
+        delete createReactionDto.rating_id;
+        const reaction = this.reactionRepository.create(createReactionDto);
+        this.reactionRepository.save(reaction);
+        return reaction;
     }
 
     findOne(options: FindOneOptions<Reaction>) {
         return this.reactionRepository.findOne(options);
     }
 
-    update() {
-        return `This action updates a #{id} reaction`;
+    update(reaction: Reaction, { value }: CreateReactionDto) {
+        if (value == reaction.value) {
+            return this.remove(reaction);
+        }
+        reaction.value = value;
+        this.reactionRepository.save(reaction);
+        return { message: "reaction has been update succsesfuly" };
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} reaction`;
+    remove(reaction: Reaction) {
+        this.reactionRepository.remove(reaction);
+        return { message: "reaction has been removed succsesfuly" };
     }
     checkAbility(
         action: ReactionsActions,
