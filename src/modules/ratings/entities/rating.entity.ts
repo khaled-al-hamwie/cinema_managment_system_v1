@@ -1,4 +1,5 @@
 import { Movie } from "src/modules/movies/entities/movie.entity";
+import { Reaction } from "src/modules/reactions/entities/reaction.entity";
 import { User } from "src/modules/users/entities/user.entity";
 import {
     Column,
@@ -7,6 +8,7 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -38,4 +40,7 @@ export class Rating {
     @ManyToOne(() => Movie, (movie) => movie.ratings)
     @JoinColumn({ name: "movie_id" })
     movie: Movie;
+
+    @OneToMany(() => Reaction, (reaction) => reaction.rating)
+    reactions: Reaction[];
 }

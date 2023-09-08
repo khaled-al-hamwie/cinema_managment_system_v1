@@ -14,6 +14,7 @@ import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
 import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
 import { RatingsModule } from './modules/ratings/ratings.module';
+import { ReactionsModule } from './modules/reactions/reactions.module';
 
 @Module({
     imports: [
@@ -32,6 +33,7 @@ import { RatingsModule } from './modules/ratings/ratings.module';
         MoviesGenrasModule,
         WatchListsModule,
         RatingsModule,
+        ReactionsModule,
     ],
 })
 export class AppModule {}

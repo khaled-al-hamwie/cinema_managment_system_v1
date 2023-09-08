@@ -1,4 +1,5 @@
 import { Rating } from "src/modules/ratings/entities/rating.entity";
+import { Reaction } from "src/modules/reactions/entities/reaction.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
     Column,
@@ -45,4 +46,7 @@ export class User {
 
     @OneToMany(() => Rating, (rating) => rating.user)
     ratings: Rating[];
+
+    @OneToMany(() => Reaction, (reaction) => reaction.user)
+    reactions: Reaction[];
 }
