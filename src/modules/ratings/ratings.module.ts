@@ -12,5 +12,6 @@ import { RatingsService } from "./ratings.service";
     imports: [TypeOrmModule.forFeature([Rating]), UsersModule, MoviesModule],
     controllers: [RatingsController],
     providers: [RatingsService, RatingsAbilityFactory, RatingsFindAllProvider],
+    exports: [RatingsService],
 })
 export class RatingsModule {}
