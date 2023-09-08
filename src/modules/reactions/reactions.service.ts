@@ -21,7 +21,10 @@ export class ReactionsService {
         delete createReactionDto.rating_id;
         const reaction = this.reactionRepository.create(createReactionDto);
         this.reactionRepository.save(reaction);
-        delete reaction.user.password;
+        delete reaction.rating.user.password;
+        delete reaction.rating.user.is_admin;
+        delete reaction.rating.user.deleted_at;
+        delete reaction.user.is_admin;
         return reaction;
     }
 
