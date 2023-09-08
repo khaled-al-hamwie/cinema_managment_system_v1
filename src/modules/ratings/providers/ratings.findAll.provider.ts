@@ -28,7 +28,7 @@ export class RatingsFindAllProvider {
         return options;
     }
 
-    GetOrder({ sort }: FindAllRatingDto): FindOptionsOrder<Rating> {
+    private GetOrder({ sort }: FindAllRatingDto): FindOptionsOrder<Rating> {
         let order: FindOptionsOrder<Rating> = {};
         if (sort == "newest") order = { created_at: "DESC" };
         else if (sort == "oldest") order = { created_at: "ASC" };
@@ -36,7 +36,7 @@ export class RatingsFindAllProvider {
         return order;
     }
 
-    GetSelect(): FindOptionsSelect<Rating> {
+    private GetSelect(): FindOptionsSelect<Rating> {
         return {
             rating_id: true,
             rating: true,
@@ -52,15 +52,33 @@ export class RatingsFindAllProvider {
         };
     }
 
-    GetRelations(): FindOptionsRelations<Rating> {
-        return { user: true };
+    private GetRelations(): FindOptionsRelations<Rating> {
+        return { user: true, reactions: true };
     }
 
-    GetWhere(
+    private GetWhere(
         movie_id: number
     ): FindOptionsWhere<Rating> | FindOptionsWhere<Rating>[] {
         const where: FindOptionsWhere<Rating> | FindOptionsWhere<Rating>[] = {};
         where["movie"] = { movie_id };
         return where;
+    }
+
+    format(ratings: Rating[]) {
+        let like = 0;
+        let dislike = 0;
+        const formated_rattings = [];
+        for (let i = 0; i < ratings.length; i++) {
+            const rating = ratings[i];
+            like = rating.reactions.filter(
+                (reaction) => Number(reaction.value) == 1
+            ).length;
+            dislike = rating.reactions.filter(
+                (reaction) => Number(reaction.value) == -1
+            ).length;
+            delete rating.reactions;
+            formated_rattings.push({ rating, like, dislike });
+        }
+        return formated_rattings;
     }
 }

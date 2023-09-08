@@ -62,7 +62,7 @@ export class RatingsController {
         );
         const ratings = await this.ratingsService.findAll(options);
         if (ratings.length < 1) throw new RatingNotFoundException();
-        return ratings;
+        return this.ratingsFindAllProvider.format(ratings);
     }
 
     @UseGuards(LoggedInGuard)
