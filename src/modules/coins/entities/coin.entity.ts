@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    DeleteDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Coin {
@@ -10,4 +15,7 @@ export class Coin {
 
     @Column({ type: "decimal", unsigned: true })
     amount: number;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 }
