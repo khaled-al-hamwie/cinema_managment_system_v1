@@ -4,7 +4,7 @@ import {
     Delete,
     Get,
     Param,
-    Patch,
+    ParseIntPipe,
     Post,
     UseGuards,
 } from "@nestjs/common";
@@ -13,9 +13,9 @@ import { LoggedInGuard } from "../auth/guards/logged-in.guard";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
 import { CoinsService } from "./coins.service";
 import { CreateCoinDto } from "./dto/create-coin.dto";
-import { UpdateCoinDto } from "./dto/update-coin.dto";
 import { Coin } from "./entities/coin.entity";
 import { CoinsActions } from "./enums/coins.actions.enum";
+import { CoinNotFoundException } from "./exceptions/coin.not.found.exception";
 
 @UseGuards(LoggedInGuard)
 @Controller("coins")
@@ -32,17 +32,19 @@ export class CoinsController {
     }
 
     @Get()
-    findAll() {
-        return this.coinsService.findAll({});
-    }
-
-    @Patch(":id")
-    update(@Param("id") id: string, @Body() updateCoinDto: UpdateCoinDto) {
-        return this.coinsService.update(+id, updateCoinDto);
+    async findAll() {
+        const coins = await this.coinsService.findAll({});
+        if (coins.length < 1) throw new CoinNotFoundException();
+        return coins;
     }
 
     @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.coinsService.remove(+id);
+    async remove(
+        @Param("id", ParseIntPipe) coin_id: number,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const coin = await this.coinsService.findById(coin_id);
+        this.coinsService.checkAbility(CoinsActions.DeleteCoin, user, coin);
+        return this.coinsService.remove(coin);
     }
 }

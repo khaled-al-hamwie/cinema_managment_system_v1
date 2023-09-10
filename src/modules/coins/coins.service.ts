@@ -6,9 +6,9 @@ import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
 import { CreateCoinDto } from "./dto/create-coin.dto";
-import { UpdateCoinDto } from "./dto/update-coin.dto";
 import { Coin } from "./entities/coin.entity";
 import { CoinsActions } from "./enums/coins.actions.enum";
+import { CoinNotFoundException } from "./exceptions/coin.not.found.exception";
 import { CoinsAbilityFactory } from "./factories/coins.ability.factory";
 
 @Injectable()
@@ -24,20 +24,23 @@ export class CoinsService {
         return coin;
     }
 
-    findOne(options: FindOneOptions<Coin>): Promise<Coin> {
-        return this.coinsRepository.findOne(options);
-    }
-
     findAll(options: FindManyOptions<Coin>): Promise<Coin[]> {
         return this.coinsRepository.find(options);
     }
 
-    update(id: number, updateCoinDto: UpdateCoinDto) {
-        return `This action updates a #${id} coin`;
+    findOne(options: FindOneOptions<Coin>): Promise<Coin> {
+        return this.coinsRepository.findOne(options);
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} coin`;
+    async findById(coin_id: number): Promise<Coin> {
+        const coin = await this.findOne({ where: { coin_id } });
+        if (!coin) throw new CoinNotFoundException();
+        return coin;
+    }
+
+    remove(coin: Coin) {
+        this.coinsRepository.softRemove(coin);
+        return { message: "coin has been removed sucssesfuly" };
     }
 
     checkAbility(
