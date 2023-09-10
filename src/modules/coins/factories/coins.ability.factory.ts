@@ -16,11 +16,9 @@ export class CoinsAbilityFactory {
         const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
         if (this.usersService.userIsAdmin(user)) {
             can(CoinsActions.CreateCoin, Coin);
-            can(CoinsActions.UpdateCoin, Coin);
             can(CoinsActions.DeleteCoin, Coin);
         } else {
             cannot(CoinsActions.CreateCoin, Coin);
-            cannot(CoinsActions.UpdateCoin, Coin);
             cannot(CoinsActions.DeleteCoin, Coin);
         }
         return build({
