@@ -16,6 +16,7 @@ import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
 import { RatingsModule } from './modules/ratings/ratings.module';
 import { ReactionsModule } from './modules/reactions/reactions.module';
 import { CoinsModule } from './modules/coins/coins.module';
+import { CoinsPurchasesModule } from './modules/coins-purchases/coins-purchases.module';
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { CoinsModule } from './modules/coins/coins.module';
         RatingsModule,
         ReactionsModule,
         CoinsModule,
+        CoinsPurchasesModule,
     ],
 })
 export class AppModule {}
