@@ -1,3 +1,4 @@
+import { CoinPurchase } from "src/modules/coins-purchases/entities/coins-purchase.entity";
 import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { Reaction } from "src/modules/reactions/entities/reaction.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
@@ -49,4 +50,7 @@ export class User {
 
     @OneToMany(() => Reaction, (reaction) => reaction.user)
     reactions: Reaction[];
+
+    @OneToMany(() => CoinPurchase, (coin_purchase) => coin_purchase.user)
+    coins_purchases: CoinPurchase[];
 }

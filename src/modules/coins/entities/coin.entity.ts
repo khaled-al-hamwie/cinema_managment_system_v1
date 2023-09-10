@@ -1,7 +1,9 @@
+import { CoinPurchase } from "src/modules/coins-purchases/entities/coins-purchase.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -18,4 +20,7 @@ export class Coin {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => CoinPurchase, (coin_purchase) => coin_purchase.coin)
+    purchases: CoinPurchase[];
 }
