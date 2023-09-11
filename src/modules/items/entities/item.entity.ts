@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    DeleteDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Item {
@@ -8,9 +13,12 @@ export class Item {
     @Column({ type: "varchar", length: 45 })
     name: string;
 
-    @Column({ type: "varchar", length: 500 })
+    @Column({ type: "varchar", length: 500, nullable: true })
     description: string;
 
     @Column({ type: "decimal", unsigned: true })
     price: number;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 }
