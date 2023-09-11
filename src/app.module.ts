@@ -17,6 +17,7 @@ import { RatingsModule } from './modules/ratings/ratings.module';
 import { ReactionsModule } from './modules/reactions/reactions.module';
 import { CoinsModule } from './modules/coins/coins.module';
 import { CoinsPurchasesModule } from './modules/coins-purchases/coins-purchases.module';
+import { ItemsModule } from './modules/items/items.module';
 
 @Module({
     imports: [
@@ -38,6 +39,7 @@ import { CoinsPurchasesModule } from './modules/coins-purchases/coins-purchases.
         ReactionsModule,
         CoinsModule,
         CoinsPurchasesModule,
+        ItemsModule,
     ],
 })
 export class AppModule {}
