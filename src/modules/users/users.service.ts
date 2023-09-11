@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { hashSync } from "bcrypt";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UploadService } from "src/core/uploads/upload.service";
 import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";

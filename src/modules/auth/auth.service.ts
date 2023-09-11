@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UsersService } from "../users/users.service";
 import { RegisterUserDto } from "./dto/register-user.dto";
 

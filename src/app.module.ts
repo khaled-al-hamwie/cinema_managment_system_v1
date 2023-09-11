@@ -12,12 +12,12 @@ import { MoviesModule } from "./modules/movies/movies.module";
 import { PositionsModule } from "./modules/positions/positions.module";
 import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
-import { WatchListsModule } from './modules/watch-lists/watch-lists.module';
-import { RatingsModule } from './modules/ratings/ratings.module';
-import { ReactionsModule } from './modules/reactions/reactions.module';
-import { CoinsModule } from './modules/coins/coins.module';
-import { CoinsPurchasesModule } from './modules/coins-purchases/coins-purchases.module';
-import { ItemsModule } from './modules/items/items.module';
+import { WatchListsModule } from "./modules/watch-lists/watch-lists.module";
+import { RatingsModule } from "./modules/ratings/ratings.module";
+import { ReactionsModule } from "./modules/reactions/reactions.module";
+import { CoinsModule } from "./modules/coins/coins.module";
+import { CoinsPurchasesModule } from "./modules/coins-purchases/coins-purchases.module";
+import { ItemsModule } from "./modules/items/items.module";
 
 @Module({
     imports: [

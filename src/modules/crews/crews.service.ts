@@ -1,6 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UploadService } from "src/core/uploads/upload.service";
 import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { User } from "../users/entities/user.entity";
