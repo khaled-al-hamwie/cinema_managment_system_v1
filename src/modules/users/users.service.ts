@@ -44,6 +44,12 @@ export class UsersService {
         return { message: "user has been updated succsesfully" };
     }
 
+    async updateCoins(user: User, coins: number) {
+        user.coins += coins;
+        await this.usersRepository.save(user);
+        return { message: "user coins has been updated" };
+    }
+
     async putAvatar(user_id: number, avatar: Express.Multer.File) {
         const user = await this.findOne({ where: { user_id } });
         if (avatar) {
