@@ -16,10 +16,12 @@ export class ItemsPurchasesAbilityFactory {
         const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
         if (this.usersService.userIsAdmin(user)) {
             cannot(ItemsPurchasesAction.CreateItemsPurchases, ItemPurchase);
-            can(ItemsPurchasesAction.GetItemsPurchases, ItemPurchase);
+            cannot(ItemsPurchasesAction.GetItemsPurchases, ItemPurchase);
+            can(ItemsPurchasesAction.ReadAllItemsPurchases, ItemPurchase);
         } else {
             can(ItemsPurchasesAction.CreateItemsPurchases, ItemPurchase);
-            cannot(ItemsPurchasesAction.GetItemsPurchases, ItemPurchase);
+            can(ItemsPurchasesAction.GetItemsPurchases, ItemPurchase);
+            cannot(ItemsPurchasesAction.ReadAllItemsPurchases, ItemPurchase);
         }
         return build({
             detectSubjectType: (item) =>
