@@ -1,21 +1,36 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
+import { UsersService } from "../users/users.service";
 import { CreateItemsPurchaseDto } from "./dto/create-items-purchase.dto";
-import { UpdateItemsPurchaseDto } from "./dto/update-items-purchase.dto";
 import { ItemPurchase } from "./entities/items-purchase.entity";
 import { ItemsPurchasesAction } from "./enums/items-purchases.actions.enum";
+import { NoEnoughMoneyException } from "./exceptions/no.enouph.money.exception";
 import { ItemsPurchasesAbilityFactory } from "./factories/items-purchases.ability.factory";
 
 @Injectable()
 export class ItemsPurchasesService {
     constructor(
-        private readonly itemsPurchasesAbilityFactory: ItemsPurchasesAbilityFactory
+        @InjectRepository(ItemPurchase)
+        private readonly itemPurchaseRepository: Repository<ItemPurchase>,
+        private readonly itemsPurchasesAbilityFactory: ItemsPurchasesAbilityFactory,
+        private readonly usersService: UsersService
     ) {}
-    create(createItemsPurchaseDto: CreateItemsPurchaseDto) {
-        return "This action adds a new itemsPurchase";
+    async create({ item, user, amount }: CreateItemsPurchaseDto) {
+        if (item.price > user.coins) throw new NoEnoughMoneyException();
+        const item_purchase = this.itemPurchaseRepository.create({
+            item,
+            user,
+            price: item.price,
+            amount,
+        });
+        await this.usersService.updateCoins(user, -item.price);
+        this.itemPurchaseRepository.save(item_purchase);
+        return item_purchase;
     }
 
     findAll() {
@@ -24,14 +39,6 @@ export class ItemsPurchasesService {
 
     findOne(id: number) {
         return `This action returns a #${id} itemsPurchase`;
-    }
-
-    update(id: number, updateItemsPurchaseDto: UpdateItemsPurchaseDto) {
-        return `This action updates a #${id} itemsPurchase`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} itemsPurchase`;
     }
 
     checkAbility(
