@@ -1,7 +1,9 @@
+import { ItemPurchase } from "src/modules/items-purchases/entities/items-purchase.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -21,4 +23,7 @@ export class Item {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => ItemPurchase, (item_purchase) => item_purchase.item)
+    items_purchases: ItemPurchase[];
 }
