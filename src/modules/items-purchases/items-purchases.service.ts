@@ -1,7 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { FindManyOptions, Repository } from "typeorm";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
@@ -33,12 +33,8 @@ export class ItemsPurchasesService {
         return item_purchase;
     }
 
-    findAll() {
-        return `This action returns all itemsPurchases`;
-    }
-
-    findOne(id: number) {
-        return `This action returns a #${id} itemsPurchase`;
+    findAll(options: FindManyOptions<ItemPurchase>) {
+        return this.itemPurchaseRepository.find(options);
     }
 
     checkAbility(
