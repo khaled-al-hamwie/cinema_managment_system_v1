@@ -11,5 +11,6 @@ import { ItemsFindAllProvider } from "./providers/items.findAll.provider";
     imports: [TypeOrmModule.forFeature([Item]), UsersModule],
     controllers: [ItemsController],
     providers: [ItemsService, ItemsAbilityFactory, ItemsFindAllProvider],
+    exports: [ItemsService],
 })
 export class ItemsModule {}
