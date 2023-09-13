@@ -38,17 +38,20 @@ export class ItemsPurchasesController {
     }
 
     @Get()
-    findAll(@UserDecorator() user: UserPayloadInterface) {
+    findMine(@UserDecorator() user: UserPayloadInterface) {
         this.itemsPurchasesService.checkAbility(
             ItemsPurchasesAction.GetItemsPurchases,
             user,
             ItemPurchase
         );
-        return this.itemsPurchasesService.findAll();
+        return this.itemsPurchasesService.findAll({
+            where: { user },
+            relations: { item: true },
+        });
     }
 
     @Get(":id")
-    findOne(
+    findForUser(
         @Param("id") user_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
@@ -57,6 +60,9 @@ export class ItemsPurchasesController {
             user,
             ItemPurchase
         );
-        return this.itemsPurchasesService.findOne(+user_id);
+        return this.itemsPurchasesService.findAll({
+            where: { user: { user_id } },
+            relations: { item: true },
+        });
     }
 }
