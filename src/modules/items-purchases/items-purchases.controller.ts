@@ -31,9 +31,9 @@ export class ItemsPurchasesController {
         createItemsPurchaseDto.item = await this.itemsService.findById(
             createItemsPurchaseDto.item_id
         );
-        createItemsPurchaseDto.user = await this.usersService.findOne({
-            where: { user_id: user.user_id },
-        });
+        createItemsPurchaseDto.user = await this.usersService.findById(
+            user.user_id
+        );
         return this.itemsPurchasesService.create(createItemsPurchaseDto);
     }
 

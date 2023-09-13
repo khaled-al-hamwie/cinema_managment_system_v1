@@ -39,6 +39,12 @@ export class UsersService {
         return requiredUser;
     }
 
+    async findById(user_id: number) {
+        const user = await this.findOne({ where: { user_id } });
+        if (!user) throw new UserNotFoundException();
+        return user;
+    }
+
     async update(user: User, updateUserDto: UpdateUserDto) {
         this.usersRepository.save({ ...user, ...updateUserDto });
         return { message: "user has been updated succsesfully" };

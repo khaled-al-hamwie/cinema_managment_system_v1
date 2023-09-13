@@ -72,10 +72,7 @@ export class UsersController {
             user,
             User
         );
-        const requiredUser = await this.usersService.findOne({
-            where: { user_id },
-        });
-        if (!requiredUser) throw new UserNotFoundException();
+        const requiredUser = await this.usersService.findById(user_id);
         return requiredUser;
     }
 
@@ -84,9 +81,7 @@ export class UsersController {
         @UserDecorator() user: UserPayloadInterface,
         @Body() updateUserDto: UpdateUserDto
     ) {
-        const requiredUser = await this.usersService.findOne({
-            where: { user_id: user.user_id },
-        });
+        const requiredUser = await this.usersService.findById(user.user_id);
         this.usersValidateService.checkAbility(
             UsersActions.UpdateUser,
             user,
@@ -106,9 +101,7 @@ export class UsersController {
 
     @Delete()
     async remove(@UserDecorator() user: UserPayloadInterface) {
-        const wantedUser = await this.usersService.findOne({
-            where: { user_id: user.user_id },
-        });
+        const wantedUser = await this.usersService.findById(user.user_id);
         this.usersValidateService.checkAbility(
             UsersActions.DeleteUser,
             user,
@@ -147,10 +140,7 @@ export class UsersController {
             user,
             User
         );
-        const wantedUser = await this.usersService.findOne({
-            where: { user_id },
-        });
-        if (!wantedUser) throw new UserNotFoundException();
+        const wantedUser = await this.usersService.findById(user_id);
         return this.usersService.remove(wantedUser);
     }
 }
