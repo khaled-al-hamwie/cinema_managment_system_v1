@@ -33,10 +33,16 @@ export class RoomsFindOneProvider {
             name: true,
             column_count: true,
             row_count: true,
+            seets: {
+                seet_id: true,
+                is_preserved: true,
+                column_index: true,
+                row_index: true,
+            },
         };
     }
 
     private GetRelation(): FindOptionsRelations<Room> {
-        return {};
+        return { seets: true };
     }
 }
