@@ -1,3 +1,4 @@
+import { MovieSession } from "src/modules/movies-sessions/entities/movies-session.entity";
 import { Seet } from "src/modules/seets/entities/seet.entity";
 import {
     Column,
@@ -26,4 +27,7 @@ export class Room {
 
     @OneToMany(() => Seet, (seet) => seet.room)
     seets: Seet[];
+
+    @OneToMany(() => MovieSession, (movie_session) => movie_session.room)
+    movie_sessions: MovieSession[];
 }

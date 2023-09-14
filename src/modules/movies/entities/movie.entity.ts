@@ -1,4 +1,5 @@
 import { MovieGenra } from "src/modules/movies-genras/entities/movies-genra.entity";
+import { MovieSession } from "src/modules/movies-sessions/entities/movies-session.entity";
 import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { Role } from "src/modules/roles/entities/role.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
@@ -50,4 +51,7 @@ export class Movie {
 
     @OneToMany(() => Rating, (rating) => rating.movie)
     ratings: Rating[];
+
+    @OneToMany(() => MovieSession, (movie_session) => movie_session.movie)
+    movie_sessions: MovieSession[];
 }
