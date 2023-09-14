@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    DeleteDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Room {
@@ -13,4 +18,7 @@ export class Room {
 
     @Column({ type: "int", unsigned: true })
     column_count: number;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 }
