@@ -16,7 +16,12 @@
             "decoratorMetadata": true
         },
         "keepClassNames": true,
-        "baseUrl": "/home/khaled/program/weeb/project/cinema-managment-system-v1"
+        "baseUrl": "/home/khaled/program/weeb/project/cinema-managment-system-v1/",
+        "paths": {
+            "src": [
+                "src/"
+            ]
+        }
     },
     "minify": false
 }
