@@ -4,6 +4,7 @@ import {
     Delete,
     Get,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
     UseGuards,
@@ -37,26 +38,28 @@ export class RoomsController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string) {
+    findOne(@Param("id", ParseIntPipe) room_id: number) {
         return this.roomsService.findOne({});
     }
 
     @Patch(":id")
-    update(
-        @Param("id") id: string,
+    async update(
+        @Param("id", ParseIntPipe) room_id: number,
         @Body() updateRoomDto: UpdateRoomDto,
         @UserDecorator() user: UserPayloadInterface
     ) {
         this.roomsService.checkAbility(RoomsActions.UpdateRoom, user, Room);
-        return this.roomsService.update(+id, updateRoomDto);
+        const room = await this.roomsService.findById(room_id);
+        return this.roomsService.update(room, updateRoomDto);
     }
 
     @Delete(":id")
-    remove(
-        @Param("id") id: string,
+    async remove(
+        @Param("id", ParseIntPipe) room_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
         this.roomsService.checkAbility(RoomsActions.DeleteRoom, user, Room);
-        return this.roomsService.remove(+id);
+        const room = await this.roomsService.findById(room_id);
+        return this.roomsService.remove(room);
     }
 }

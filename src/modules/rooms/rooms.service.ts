@@ -10,6 +10,7 @@ import { UpdateRoomDto } from "./dto/update-room.dto";
 import { Room } from "./entities/room.entity";
 import { RoomsActions } from "./enums/rooms.actions.enum";
 import { RoomNameNotAllowedException } from "./exceptions/room.name.not.allowed.exception";
+import { RoomNotFoundException } from "./exceptions/room.not.found.exception";
 import { RoomsAbilityFactory } from "./factories/rooms-ability.factory";
 
 @Injectable()
@@ -34,12 +35,21 @@ export class RoomsService {
         return this.RoomRepository.findOne(options);
     }
 
-    update(id: number, updateRoomDto: UpdateRoomDto) {
-        return `This action updates a #${id} room`;
+    async findById(room_id: number) {
+        const room = await this.findOne({ where: { room_id } });
+        if (!room) throw new RoomNotFoundException();
+        return room;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} room`;
+    async update(room: Room, updateRoomDto: UpdateRoomDto) {
+        await this.checkRoomName(updateRoomDto.name);
+        this.RoomRepository.save({ ...room, ...updateRoomDto });
+        return { message: "room has been update" };
+    }
+
+    remove(room: Room) {
+        this.RoomRepository.softRemove(room);
+        return { message: "room has been deleted" };
     }
 
     async checkRoomName(name: string) {
