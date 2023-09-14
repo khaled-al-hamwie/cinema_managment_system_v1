@@ -1,5 +1,11 @@
 import { Room } from "src/modules/rooms/entities/room.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Seet {
@@ -16,5 +22,6 @@ export class Seet {
     column_index: number;
 
     @ManyToOne(() => Room, (room) => room.seets)
+    @JoinColumn({ name: "room_id" })
     room: Room;
 }
