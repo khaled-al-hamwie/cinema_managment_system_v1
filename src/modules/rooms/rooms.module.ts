@@ -18,5 +18,6 @@ import { RoomsService } from "./rooms.service";
         RoomsFindAllProvider,
         RoomsFindOneProvider,
     ],
+    exports: [RoomsService],
 })
 export class RoomsModule {}
