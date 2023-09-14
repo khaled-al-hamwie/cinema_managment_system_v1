@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { FindManyOptions, Repository } from "typeorm";
+import { Room } from "../rooms/entities/room.entity";
 import { CreateSeetDto } from "./dto/create-seet.dto";
 import { CreateSeetsDto } from "./dto/create-seets.dto";
 import { Seet } from "./entities/seet.entity";
@@ -29,19 +30,16 @@ export class SeetsService {
         }
     }
 
-    findAll() {
-        return `This action returns all seets`;
-    }
-
-    findOne(id: number) {
-        return `This action returns a #${id} seet`;
+    findAll(options: FindManyOptions<Seet>) {
+        return this.seetRepository.find(options);
     }
 
     update(id: number) {
         return `This action updates a #${id} seet`;
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} seet`;
+    async remove(room: Room) {
+        const seets = await this.findAll({ where: { room } });
+        await this.seetRepository.softRemove(seets);
     }
 }

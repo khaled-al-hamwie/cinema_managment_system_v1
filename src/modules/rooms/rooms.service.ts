@@ -57,7 +57,8 @@ export class RoomsService {
         return { message: "room has been update" };
     }
 
-    remove(room: Room) {
+    async remove(room: Room) {
+        await this.seetsService.remove(room);
         this.RoomRepository.softRemove(room);
         return { message: "room has been deleted" };
     }

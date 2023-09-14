@@ -1,6 +1,7 @@
 import { Room } from "src/modules/rooms/entities/room.entity";
 import {
     Column,
+    DeleteDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
@@ -20,6 +21,9 @@ export class Seet {
 
     @Column({ type: "int", unsigned: true })
     column_index: number;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 
     @ManyToOne(() => Room, (room) => room.seets)
     @JoinColumn({ name: "room_id" })
