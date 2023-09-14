@@ -59,7 +59,7 @@ export class MoviesSessionsController {
     }
 
     @Patch(":id")
-    update(
+    async update(
         @Param("id", ParseIntPipe) movie_session_id: number,
         @Body() updateMoviesSessionDto: UpdateMoviesSessionDto,
         @UserDecorator() user: UserPayloadInterface
@@ -69,7 +69,13 @@ export class MoviesSessionsController {
             user,
             MovieSession
         );
-        // return this.moviesSessionsService.update(+id, updateMoviesSessionDto);
+        const movie_session = await this.moviesSessionsService.findById(
+            movie_session_id
+        );
+        return this.moviesSessionsService.update(
+            movie_session,
+            updateMoviesSessionDto
+        );
     }
 
     @Delete(":id")

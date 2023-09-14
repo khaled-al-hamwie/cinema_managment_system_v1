@@ -46,8 +46,15 @@ export class MoviesSessionsService {
         return movie_session;
     }
 
-    update(id: number, updateMoviesSessionDto: UpdateMoviesSessionDto) {
-        return `This action updates a #${id} moviesSession`;
+    update(
+        movie_session: MovieSession,
+        updateMoviesSessionDto: UpdateMoviesSessionDto
+    ) {
+        this.movieSessionRepository.save({
+            ...movie_session,
+            ...updateMoviesSessionDto,
+        });
+        return { message: "movie session has been updated" };
     }
 
     remove(movie_session: MovieSession) {

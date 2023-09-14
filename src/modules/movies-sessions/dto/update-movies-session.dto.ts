@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateMoviesSessionDto } from './create-movies-session.dto';
+import { PartialType } from "@nestjs/swagger";
+import { CreateMoviesSessionDto } from "./create-movies-session.dto";
 
-export class UpdateMoviesSessionDto extends PartialType(CreateMoviesSessionDto) {}
+export class UpdateMoviesSessionDto extends PartialType(
+    CreateMoviesSessionDto
+) {}
