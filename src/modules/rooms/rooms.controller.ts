@@ -20,6 +20,7 @@ import { Room } from "./entities/room.entity";
 import { RoomsActions } from "./enums/rooms.actions.enum";
 import { RoomNotFoundException } from "./exceptions/room.not.found.exception";
 import { RoomsFindAllProvider } from "./providers/rooms.findAll.provider";
+import { RoomsFindOneProvider } from "./providers/rooms.findOne.provider";
 import { RoomsService } from "./rooms.service";
 
 @UseGuards(LoggedInGuard)
@@ -27,7 +28,8 @@ import { RoomsService } from "./rooms.service";
 export class RoomsController {
     constructor(
         private readonly roomsService: RoomsService,
-        private readonly roomsFindAllProvider: RoomsFindAllProvider
+        private readonly roomsFindAllProvider: RoomsFindAllProvider,
+        private readonly roomsFindOneProvider: RoomsFindOneProvider
     ) {}
 
     @Post()
@@ -48,8 +50,11 @@ export class RoomsController {
     }
 
     @Get(":id")
-    findOne(@Param("id", ParseIntPipe) room_id: number) {
-        return this.roomsService.findOne({});
+    async findOne(@Param("id", ParseIntPipe) room_id: number) {
+        const options = this.roomsFindOneProvider.GetOptions(room_id);
+        const room = await this.roomsService.findOne(options);
+        if (!room) throw new RoomNotFoundException();
+        return room;
     }
 
     @Patch(":id")
