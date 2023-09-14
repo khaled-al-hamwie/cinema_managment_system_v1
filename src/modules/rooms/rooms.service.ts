@@ -64,7 +64,7 @@ export class RoomsService {
     }
 
     async checkRoomName(name: string) {
-        const room = await this.findOne({ where: { name } });
+        const room = await this.findOne({ where: { name }, withDeleted: true });
         if (room) throw new RoomNameNotAllowedException();
     }
 
