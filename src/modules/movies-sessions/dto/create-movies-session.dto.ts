@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import {
     IsISO8601,
     IsInt,
@@ -8,6 +9,8 @@ import {
     Max,
     Min,
 } from "class-validator";
+import { Movie } from "src/modules/movies/entities/movie.entity";
+import { Room } from "src/modules/rooms/entities/room.entity";
 
 export class CreateMoviesSessionDto {
     @IsInt()
@@ -38,4 +41,7 @@ export class CreateMoviesSessionDto {
     @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false })
     @Min(0)
     price: number;
+
+    movie: Movie;
+    room: Room;
 }

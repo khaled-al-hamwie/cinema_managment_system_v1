@@ -20,7 +20,13 @@ export class MoviesSessionsService {
     ) {}
 
     create(createMoviesSessionDto: CreateMoviesSessionDto) {
-        return "This action adds a new moviesSession";
+        delete createMoviesSessionDto.movie_id;
+        delete createMoviesSessionDto.room_id;
+        const movie_session = this.movieSessionRepository.create(
+            createMoviesSessionDto
+        );
+        this.movieSessionRepository.save(movie_session);
+        return movie_session;
     }
 
     findAll() {
