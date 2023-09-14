@@ -9,6 +9,7 @@ import {
     Max,
     Min,
 } from "class-validator";
+import { IsFutureDate } from "src/core/validators/is.future.validator";
 import { Movie } from "src/modules/movies/entities/movie.entity";
 import { Room } from "src/modules/rooms/entities/room.entity";
 
@@ -36,6 +37,7 @@ export class CreateMoviesSessionDto {
     duration: number;
 
     @IsISO8601()
+    @IsFutureDate()
     date: string;
 
     @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false })
