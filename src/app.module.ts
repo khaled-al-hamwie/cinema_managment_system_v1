@@ -19,6 +19,7 @@ import { RolesModule } from "./modules/roles/roles.module";
 import { UsersModule } from "./modules/users/users.module";
 import { WatchListsModule } from "./modules/watch-lists/watch-lists.module";
 import { ItemsPurchasesModule } from "./modules/items-purchases/items-purchases.module";
+import { RoomsModule } from './modules/rooms/rooms.module';
 
 @Module({
     imports: [
@@ -42,6 +43,7 @@ import { ItemsPurchasesModule } from "./modules/items-purchases/items-purchases.
         CoinsPurchasesModule,
         ItemsModule,
         ItemsPurchasesModule,
+        RoomsModule,
     ],
 })
 export class AppModule {}
