@@ -1,7 +1,9 @@
+import { Seet } from "src/modules/seets/entities/seet.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -21,4 +23,7 @@ export class Room {
 
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @OneToMany(() => Seet, (seet) => seet.room)
+    seets: Seet[];
 }
