@@ -18,13 +18,16 @@ import { CreateMoviesSessionDto } from "./dto/create-movies-session.dto";
 import { UpdateMoviesSessionDto } from "./dto/update-movies-session.dto";
 import { MovieSession } from "./entities/movies-session.entity";
 import { MoviesSessionsActions } from "./enums/movies-sessions.actions.enum";
+import { MovieSessionNotFoundException } from "./exceptions/movie-session.not.found.exception";
 import { MoviesSessionsService } from "./movies-sessions.service";
+import { MoviesSessionsFindOneProvider } from "./providers/movies-sessions.findOne.provider";
 
 @UseGuards(LoggedInGuard)
 @Controller("movies-sessions")
 export class MoviesSessionsController {
     constructor(
         private readonly moviesSessionsService: MoviesSessionsService,
+        private readonly moviesSessionsFindOneProvider: MoviesSessionsFindOneProvider,
         private readonly moviesService: MoviesService,
         private readonly roomsService: RoomsService
     ) {}
@@ -54,8 +57,12 @@ export class MoviesSessionsController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string) {
-        return this.moviesSessionsService.findOne({});
+    async findOne(@Param("id", ParseIntPipe) movie_session_id: number) {
+        const options =
+            this.moviesSessionsFindOneProvider.GetOptions(movie_session_id);
+        const movie_session = await this.moviesSessionsService.findOne(options);
+        if (!movie_session) throw new MovieSessionNotFoundException();
+        return movie_session;
     }
 
     @Patch(":id")
