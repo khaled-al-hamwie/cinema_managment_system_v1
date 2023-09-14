@@ -2,6 +2,7 @@ import { Movie } from "src/modules/movies/entities/movie.entity";
 import { Room } from "src/modules/rooms/entities/room.entity";
 import {
     Column,
+    DeleteDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
@@ -27,6 +28,9 @@ export class MovieSession {
 
     @Column({ type: "decimal", unsigned: true })
     price: number;
+
+    @DeleteDateColumn()
+    deleted_at: Date;
 
     @ManyToOne(() => Room, (room) => room.movie_sessions)
     @JoinColumn({ name: "room_id" })

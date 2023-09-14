@@ -4,6 +4,7 @@ import {
     Delete,
     Get,
     Param,
+    ParseIntPipe,
     Patch,
     Post,
     UseGuards,
@@ -54,12 +55,12 @@ export class MoviesSessionsController {
 
     @Get(":id")
     findOne(@Param("id") id: string) {
-        return this.moviesSessionsService.findOne(+id);
+        return this.moviesSessionsService.findOne({});
     }
 
     @Patch(":id")
     update(
-        @Param("id") id: string,
+        @Param("id", ParseIntPipe) movie_session_id: number,
         @Body() updateMoviesSessionDto: UpdateMoviesSessionDto,
         @UserDecorator() user: UserPayloadInterface
     ) {
@@ -68,12 +69,12 @@ export class MoviesSessionsController {
             user,
             MovieSession
         );
-        return this.moviesSessionsService.update(+id, updateMoviesSessionDto);
+        // return this.moviesSessionsService.update(+id, updateMoviesSessionDto);
     }
 
     @Delete(":id")
-    remove(
-        @Param("id") id: string,
+    async remove(
+        @Param("id", ParseIntPipe) movie_session_id: number,
         @UserDecorator() user: UserPayloadInterface
     ) {
         this.moviesSessionsService.checkAbility(
@@ -81,6 +82,9 @@ export class MoviesSessionsController {
             user,
             MovieSession
         );
-        return this.moviesSessionsService.remove(+id);
+        const movie_session = await this.moviesSessionsService.findById(
+            movie_session_id
+        );
+        return this.moviesSessionsService.remove(movie_session);
     }
 }
