@@ -16,10 +16,10 @@ export class TicketsAbilityFactory {
         const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
         if (this.usersService.userIsAdmin(user)) {
             cannot(TicketsActions.CreateTickets, Ticket);
-            can(TicketsActions.SeeAllTicket, Ticket);
+            cannot(TicketsActions.GetTicket, Ticket);
         } else {
             can(TicketsActions.CreateTickets, Ticket);
-            cannot(TicketsActions.SeeAllTicket, Ticket);
+            can(TicketsActions.GetTicket, Ticket);
         }
         return build({
             detectSubjectType: (item) =>
