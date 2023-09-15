@@ -40,12 +40,12 @@ export class SeetsService {
         return this.seetRepository.findOne(options);
     }
 
-    async findAvailableById(seet_id: number) {
+    async findAvailableById(seet_id: number, room: Room) {
         const seet = await this.findOne({
-            where: { seet_id },
+            where: { seet_id, room },
         });
         if (!seet) throw new SeetNotFoundException();
-        if (seet.is_preserved == false) throw new SeetNotAvailableException();
+        if (seet.is_preserved == true) throw new SeetNotAvailableException();
         return seet;
     }
     update(id: number) {
