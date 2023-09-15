@@ -1,10 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { FindManyOptions, FindOneOptions, Repository } from "typeorm";
 import { Room } from "../rooms/entities/room.entity";
 import { CreateSeetDto } from "./dto/create-seet.dto";
 import { CreateSeetsDto } from "./dto/create-seets.dto";
 import { Seet } from "./entities/seet.entity";
+import { SeetNotAvailableException } from "./exceptions/seet.not.available.exception";
+import { SeetNotFoundException } from "./exceptions/seet.not.found.exception";
 
 @Injectable()
 export class SeetsService {
@@ -34,6 +36,18 @@ export class SeetsService {
         return this.seetRepository.find(options);
     }
 
+    async findOne(options: FindOneOptions<Seet>) {
+        return this.seetRepository.findOne(options);
+    }
+
+    async findAvailableById(seet_id: number) {
+        const seet = await this.findOne({
+            where: { seet_id },
+        });
+        if (!seet) throw new SeetNotFoundException();
+        if (seet.is_preserved == false) throw new SeetNotAvailableException();
+        return seet;
+    }
     update(id: number) {
         return `This action updates a #${id} seet`;
     }
