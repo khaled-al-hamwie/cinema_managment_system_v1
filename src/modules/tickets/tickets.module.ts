@@ -5,6 +5,7 @@ import { SeetsModule } from "../seets/seets.module";
 import { UsersModule } from "../users/users.module";
 import { Ticket } from "./entities/ticket.entity";
 import { TicketsAbilityFactory } from "./factories/tickets-ability.factory";
+import { TicketsFindAllProvider } from "./providers/tickets.findAll.provider";
 import { TicketsController } from "./tickets.controller";
 import { TicketsService } from "./tickets.service";
 
@@ -16,6 +17,6 @@ import { TicketsService } from "./tickets.service";
         MoviesSessionsModule,
     ],
     controllers: [TicketsController],
-    providers: [TicketsService, TicketsAbilityFactory],
+    providers: [TicketsService, TicketsAbilityFactory, TicketsFindAllProvider],
 })
 export class TicketsModule {}
