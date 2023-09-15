@@ -1,10 +1,12 @@
 import { Room } from "src/modules/rooms/entities/room.entity";
+import { Ticket } from "src/modules/tickets/entities/ticket.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -28,4 +30,7 @@ export class Seet {
     @ManyToOne(() => Room, (room) => room.seets)
     @JoinColumn({ name: "room_id" })
     room: Room;
+
+    @OneToMany(() => Ticket, (ticket) => ticket.seet)
+    tickets: Ticket[];
 }

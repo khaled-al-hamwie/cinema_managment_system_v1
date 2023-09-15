@@ -1,11 +1,13 @@
 import { Movie } from "src/modules/movies/entities/movie.entity";
 import { Room } from "src/modules/rooms/entities/room.entity";
+import { Ticket } from "src/modules/tickets/entities/ticket.entity";
 import {
     Column,
     DeleteDateColumn,
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -39,4 +41,7 @@ export class MovieSession {
     @ManyToOne(() => Movie, (movie) => movie.movie_sessions)
     @JoinColumn({ name: "movie_id" })
     movie: Movie;
+
+    @OneToMany(() => Ticket, (ticket) => ticket.movie_session)
+    tickets: Ticket[];
 }

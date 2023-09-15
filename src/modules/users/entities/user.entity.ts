@@ -2,6 +2,7 @@ import { CoinPurchase } from "src/modules/coins-purchases/entities/coins-purchas
 import { ItemPurchase } from "src/modules/items-purchases/entities/items-purchase.entity";
 import { Rating } from "src/modules/ratings/entities/rating.entity";
 import { Reaction } from "src/modules/reactions/entities/reaction.entity";
+import { Ticket } from "src/modules/tickets/entities/ticket.entity";
 import { WatchList } from "src/modules/watch-lists/entities/watch-list.entity";
 import {
     Column,
@@ -57,4 +58,7 @@ export class User {
 
     @OneToMany(() => ItemPurchase, (item_purchase) => item_purchase.user)
     items_purchases: ItemPurchase[];
+
+    @OneToMany(() => Ticket, (ticket) => ticket.user)
+    tickets: Ticket[];
 }
