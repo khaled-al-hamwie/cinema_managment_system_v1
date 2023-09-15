@@ -74,6 +74,6 @@ export class MoviesSessionsFindAllProvider {
     }
 
     private GetRelation(): FindOptionsRelations<MovieSession> {
-        return { movie: true };
+        return { movie: true, room: true };
     }
 }

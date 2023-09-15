@@ -67,8 +67,12 @@ export class MoviesSessionsFindOneProvider {
     private GetRelation(ability: boolean): FindOptionsRelations<MovieSession> {
         let relation: FindOptionsRelations<MovieSession> = {};
         if (ability)
-            relation = { movie: true, tickets: { user: true, seet: true } };
-        else relation = { movie: true };
+            relation = {
+                movie: true,
+                tickets: { user: true, seet: true },
+                room: true,
+            };
+        else relation = { movie: true, room: true };
         return relation;
     }
 }
