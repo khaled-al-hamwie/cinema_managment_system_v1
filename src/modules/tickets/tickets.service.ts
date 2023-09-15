@@ -2,6 +2,7 @@ import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { SeetsService } from "../seets/seets.service";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
@@ -14,14 +15,16 @@ import { TicketsAbilityFactory } from "./factories/tickets-ability.factory";
 export class TicketsService {
     constructor(
         @InjectRepository(Ticket) private TicketRepository: Repository<Ticket>,
-        private readonly ticketsAbilityFactory: TicketsAbilityFactory
+        private readonly ticketsAbilityFactory: TicketsAbilityFactory,
+        private readonly seetsService: SeetsService
     ) {}
-    create(createTicketDto: CreateTicketDto) {
+    async create(createTicketDto: CreateTicketDto) {
         delete createTicketDto.movie_session_id;
         delete createTicketDto.seet_id;
         const ticket = this.TicketRepository.create(createTicketDto);
         ticket.price = createTicketDto.movie_session.price;
         this.TicketRepository.save(ticket);
+        await this.seetsService.update(createTicketDto.seet, true);
         return ticket;
     }
 
