@@ -17,8 +17,10 @@ export class TicketsService {
         private readonly ticketsAbilityFactory: TicketsAbilityFactory
     ) {}
     create(createTicketDto: CreateTicketDto) {
+        delete createTicketDto.movie_session_id;
+        delete createTicketDto.seet_id;
         const ticket = this.TicketRepository.create(createTicketDto);
-        // ticket.price = createTicketDto.movie_session.price;
+        ticket.price = createTicketDto.movie_session.price;
         this.TicketRepository.save(ticket);
         return ticket;
     }
