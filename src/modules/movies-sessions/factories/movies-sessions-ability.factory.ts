@@ -18,10 +18,12 @@ export class MoviesSessionsAbilityFactory {
             can(MoviesSessionsActions.CreateMoviesSessions, MovieSession);
             can(MoviesSessionsActions.UpdateMoviesSession, MovieSession);
             can(MoviesSessionsActions.DeleteMoviesSession, MovieSession);
+            can(MoviesSessionsActions.SeeAllMoviesSession, MovieSession);
         } else {
             cannot(MoviesSessionsActions.CreateMoviesSessions, MovieSession);
             cannot(MoviesSessionsActions.UpdateMoviesSession, MovieSession);
             cannot(MoviesSessionsActions.DeleteMoviesSession, MovieSession);
+            cannot(MoviesSessionsActions.SeeAllMoviesSession, MovieSession);
         }
         return build({
             detectSubjectType: (item) =>

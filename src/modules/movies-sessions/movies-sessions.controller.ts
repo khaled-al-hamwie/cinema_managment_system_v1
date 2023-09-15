@@ -69,9 +69,14 @@ export class MoviesSessionsController {
     }
 
     @Get(":id")
-    async findOne(@Param("id", ParseIntPipe) movie_session_id: number) {
-        const options =
-            this.moviesSessionsFindOneProvider.GetOptions(movie_session_id);
+    async findOne(
+        @Param("id", ParseIntPipe) movie_session_id: number,
+        @UserDecorator() user: UserPayloadInterface
+    ) {
+        const options = this.moviesSessionsFindOneProvider.GetOptions(
+            movie_session_id,
+            user
+        );
         const movie_session = await this.moviesSessionsService.findOne(options);
         if (!movie_session) throw new MovieSessionNotFoundException();
         return movie_session;

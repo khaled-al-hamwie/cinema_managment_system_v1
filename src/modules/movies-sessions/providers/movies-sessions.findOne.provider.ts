@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { UserPayloadInterface } from "src/modules/users/interfaces/user.payload.interface";
 import {
     FindManyOptions,
     FindOneOptions,
@@ -7,14 +8,25 @@ import {
     FindOptionsWhere,
 } from "typeorm";
 import { MovieSession } from "../entities/movies-session.entity";
+import { MoviesSessionsActions } from "../enums/movies-sessions.actions.enum";
+import { MoviesSessionsAbilityFactory } from "../factories/movies-sessions-ability.factory";
 
 @Injectable()
 export class MoviesSessionsFindOneProvider {
-    GetOptions(MoviesSession_id: number): FindOneOptions<MovieSession> {
+    constructor(
+        private readonly moviesSessionsAbilityFactory: MoviesSessionsAbilityFactory
+    ) {}
+    GetOptions(
+        MoviesSession_id: number,
+        user: UserPayloadInterface
+    ): FindOneOptions<MovieSession> {
         const options: FindManyOptions<MovieSession> = {};
+        const ability = this.moviesSessionsAbilityFactory
+            .createForUser(user)
+            .can(MoviesSessionsActions.SeeAllMoviesSession, MovieSession);
         options.where = this.GetWhere(MoviesSession_id);
+        options.relations = this.GetRelation(ability);
         options.select = this.GetSelect();
-        options.relations = this.GetRelation();
         return options;
     }
 
@@ -38,10 +50,25 @@ export class MoviesSessionsFindOneProvider {
             duration: true,
             price: true,
             movie: { movie_id: true, cover_pic: true, title: true },
+            tickets: {
+                ticket_id: true,
+                created_at: true,
+                price: true,
+                user: {
+                    user_id: true,
+                    first_name: true,
+                    last_name: true,
+                    pic: true,
+                },
+            },
         };
     }
 
-    private GetRelation(): FindOptionsRelations<MovieSession> {
-        return { movie: true };
+    private GetRelation(ability: boolean): FindOptionsRelations<MovieSession> {
+        let relation: FindOptionsRelations<MovieSession> = {};
+        if (ability)
+            relation = { movie: true, tickets: { user: true, seet: true } };
+        else relation = { movie: true };
+        return relation;
     }
 }
