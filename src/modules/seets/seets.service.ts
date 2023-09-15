@@ -48,8 +48,10 @@ export class SeetsService {
         if (seet.is_preserved == true) throw new SeetNotAvailableException();
         return seet;
     }
-    update(id: number) {
-        return `This action updates a #${id} seet`;
+    async update(seet: Seet, is_preserved: boolean) {
+        seet.is_preserved = is_preserved;
+        await this.seetRepository.save(seet);
+        return seet;
     }
 
     async remove(room: Room) {
