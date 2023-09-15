@@ -1,7 +1,13 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindOneOptions, LessThan, Not, Repository } from "typeorm";
+import {
+    FindManyOptions,
+    FindOneOptions,
+    LessThan,
+    Not,
+    Repository,
+} from "typeorm";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
@@ -30,8 +36,8 @@ export class MoviesSessionsService {
         return movie_session;
     }
 
-    findAll() {
-        return `This action returns all moviesSessions`;
+    findAll(options: FindManyOptions<MovieSession>) {
+        return this.movieSessionRepository.find(options);
     }
 
     findOne(options: FindOneOptions<MovieSession>) {

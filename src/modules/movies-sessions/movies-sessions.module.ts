@@ -7,6 +7,7 @@ import { MovieSession } from "./entities/movies-session.entity";
 import { MoviesSessionsAbilityFactory } from "./factories/movies-sessions-ability.factory";
 import { MoviesSessionsController } from "./movies-sessions.controller";
 import { MoviesSessionsService } from "./movies-sessions.service";
+import { MoviesSessionsFindAllProvider } from "./providers/movies-session.findAll.provider";
 import { MoviesSessionsFindOneProvider } from "./providers/movies-sessions.findOne.provider";
 
 @Module({
@@ -21,6 +22,7 @@ import { MoviesSessionsFindOneProvider } from "./providers/movies-sessions.findO
         MoviesSessionsService,
         MoviesSessionsAbilityFactory,
         MoviesSessionsFindOneProvider,
+        MoviesSessionsFindAllProvider,
     ],
 })
 export class MoviesSessionsModule {}

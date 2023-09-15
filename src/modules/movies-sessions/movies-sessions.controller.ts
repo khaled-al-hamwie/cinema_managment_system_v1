@@ -7,6 +7,7 @@ import {
     ParseIntPipe,
     Patch,
     Post,
+    Query,
     UseGuards,
 } from "@nestjs/common";
 import { UserDecorator } from "src/core/decorators/user.decorator";
@@ -15,11 +16,13 @@ import { MoviesService } from "../movies/services/movies.service";
 import { RoomsService } from "../rooms/rooms.service";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
 import { CreateMoviesSessionDto } from "./dto/create-movies-session.dto";
+import { FindAllMovieSessionDto } from "./dto/findAll-movie-seession.dto";
 import { UpdateMoviesSessionDto } from "./dto/update-movies-session.dto";
 import { MovieSession } from "./entities/movies-session.entity";
 import { MoviesSessionsActions } from "./enums/movies-sessions.actions.enum";
 import { MovieSessionNotFoundException } from "./exceptions/movie-session.not.found.exception";
 import { MoviesSessionsService } from "./movies-sessions.service";
+import { MoviesSessionsFindAllProvider } from "./providers/movies-session.findAll.provider";
 import { MoviesSessionsFindOneProvider } from "./providers/movies-sessions.findOne.provider";
 
 @UseGuards(LoggedInGuard)
@@ -28,6 +31,7 @@ export class MoviesSessionsController {
     constructor(
         private readonly moviesSessionsService: MoviesSessionsService,
         private readonly moviesSessionsFindOneProvider: MoviesSessionsFindOneProvider,
+        private readonly moviesSessionsFindAllProvider: MoviesSessionsFindAllProvider,
         private readonly moviesService: MoviesService,
         private readonly roomsService: RoomsService
     ) {}
@@ -52,8 +56,16 @@ export class MoviesSessionsController {
     }
 
     @Get()
-    findAll() {
-        return this.moviesSessionsService.findAll();
+    async findAll(@Query() findAllMovieSessionDto: FindAllMovieSessionDto) {
+        const options = this.moviesSessionsFindAllProvider.GetOptions(
+            findAllMovieSessionDto
+        );
+        const movie_sessions = await this.moviesSessionsService.findAll(
+            options
+        );
+        if (movie_sessions.length < 1)
+            throw new MovieSessionNotFoundException();
+        return movie_sessions;
     }
 
     @Get(":id")
