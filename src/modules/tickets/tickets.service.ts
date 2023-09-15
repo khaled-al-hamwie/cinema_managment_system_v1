@@ -1,7 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { FindManyOptions, Repository } from "typeorm";
 import { SeetsService } from "../seets/seets.service";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
@@ -28,12 +28,8 @@ export class TicketsService {
         return ticket;
     }
 
-    findAll() {
-        return `This action returns all tickets`;
-    }
-
-    findOne(id: number) {
-        return `This action returns a #${id} ticket`;
+    findAll(options: FindManyOptions<Ticket>) {
+        return this.TicketRepository.find(options);
     }
 
     checkAbility(
