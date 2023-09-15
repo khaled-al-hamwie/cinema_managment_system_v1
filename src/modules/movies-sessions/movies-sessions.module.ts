@@ -24,5 +24,6 @@ import { MoviesSessionsFindOneProvider } from "./providers/movies-sessions.findO
         MoviesSessionsFindOneProvider,
         MoviesSessionsFindAllProvider,
     ],
+    exports: [MoviesSessionsService],
 })
 export class MoviesSessionsModule {}
