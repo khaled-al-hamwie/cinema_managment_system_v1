@@ -68,6 +68,10 @@ export class RoomsService {
         if (room) throw new RoomNameNotAllowedException();
     }
 
+    async updateRoomSeets(room_id: number, is_preserved: boolean) {
+        const room = await this.findById(room_id);
+        await this.seetsService.updateSeets(room.seets, is_preserved);
+    }
     checkAbility(
         action: RoomsActions,
         user: UserPayloadInterface | User,
