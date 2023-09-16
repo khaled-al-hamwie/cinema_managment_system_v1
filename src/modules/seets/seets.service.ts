@@ -54,6 +54,13 @@ export class SeetsService {
         return seet;
     }
 
+    async updateSeets(seets: Seet[], is_preserved: boolean) {
+        for (let i = 0; i < seets.length; i++) {
+            const seet = seets[i];
+            await this.update(seet, is_preserved);
+        }
+    }
+
     async remove(room: Room) {
         const seets = await this.findAll({ where: { room } });
         await this.seetRepository.softRemove(seets);
