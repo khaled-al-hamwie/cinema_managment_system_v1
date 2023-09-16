@@ -1,5 +1,7 @@
 import { ExtractSubjectType } from "@casl/ability";
 import { Injectable } from "@nestjs/common";
+import { EventEmitter2, OnEvent } from "@nestjs/event-emitter";
+import { SchedulerRegistry } from "@nestjs/schedule";
 import { InjectRepository } from "@nestjs/typeorm";
 import {
     FindManyOptions,
@@ -8,6 +10,7 @@ import {
     Not,
     Repository,
 } from "typeorm";
+import { RoomsService } from "../rooms/rooms.service";
 import { User } from "../users/entities/user.entity";
 import { UserUnauthorizedException } from "../users/exceptions/userUnauthorized.exception";
 import { UserPayloadInterface } from "../users/interfaces/user.payload.interface";
@@ -23,7 +26,10 @@ export class MoviesSessionsService {
     constructor(
         @InjectRepository(MovieSession)
         private readonly movieSessionRepository: Repository<MovieSession>,
-        private readonly moviesSessionsAbilityFactory: MoviesSessionsAbilityFactory
+        private readonly moviesSessionsAbilityFactory: MoviesSessionsAbilityFactory,
+        private readonly eventEmitter: EventEmitter2,
+        private readonly schedualRegistry: SchedulerRegistry,
+        private readonly roomsService: RoomsService
     ) {}
 
     create(createMoviesSessionDto: CreateMoviesSessionDto) {
@@ -33,6 +39,7 @@ export class MoviesSessionsService {
             createMoviesSessionDto
         );
         this.movieSessionRepository.save(movie_session);
+        this.eventEmitter.emit("create_movie_session", movie_session);
         return movie_session;
     }
 
@@ -76,5 +83,18 @@ export class MoviesSessionsService {
         const ability = this.moviesSessionsAbilityFactory.createForUser(user);
         if (ability.cannot(action, subject))
             throw new UserUnauthorizedException();
+    }
+
+    @OnEvent("create_movie_session", { async: true })
+    async onCreateMovieSession(movie_session: MovieSession) {
+        this.schedualRegistry.addTimeout(
+            `${movie_session.movie_session_id}:movie_session`,
+            setTimeout(async () => {
+                await this.roomsService.updateRoomSeets(
+                    movie_session.room.room_id,
+                    false
+                );
+            }, new Date(movie_session.date).getTime() - Date.now())
+        );
     }
 }
