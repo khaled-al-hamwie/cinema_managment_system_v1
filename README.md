@@ -12,11 +12,25 @@ were each one of them can
 
 ## Features
 
+here is the list of the feature that the api provide
+
 ### For Stuff
+
+- add ,remove movies
+- add ,remove crew to the movie
+- add ,remove genra to the movie
+- manage the coins transaction
+- manage the item and movies purchases
+- manage the ticket and movies sessions
 
 ### For Customer
 
-## Use Case diagram
+- surfe the movies
+- add movie to his watch list
+- check the movies crew and genra
+- check the movies rating and rating movies
+- buy ticket for the movies
+- buy items from the movie store like murch and pop corn
 
 ## ERD
 
