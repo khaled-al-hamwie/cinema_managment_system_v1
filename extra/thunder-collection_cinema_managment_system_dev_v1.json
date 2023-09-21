@@ -1,0 +1,1580 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "cinema_managment_system_dev_v1",
+    "dateExported": "2023-09-21T12:06:10.542Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "d54c0cfb-8669-4550-a776-8dce78ab273d",
+            "name": "auth",
+            "containerId": "",
+            "created": "2023-09-02T20:46:17.068Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "user",
+            "containerId": "",
+            "created": "2023-09-03T10:25:09.171Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "movies",
+            "containerId": "",
+            "created": "2023-09-03T17:30:07.540Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "b0a2a630-a23b-4ed1-92cc-f981e9164eed",
+            "name": "positions",
+            "containerId": "",
+            "created": "2023-09-05T11:19:54.729Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "crews",
+            "containerId": "",
+            "created": "2023-09-05T14:08:56.544Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "66e62cfa-b218-4ad4-82e7-43722bd57c01",
+            "name": "crews-positions",
+            "containerId": "",
+            "created": "2023-09-05T16:31:13.737Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "608fcc4f-f7bd-4b45-9b5a-52e0307e4e64",
+            "name": "roles",
+            "containerId": "",
+            "created": "2023-09-05T21:05:57.087Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "909e5a4d-0f26-4910-be82-19d056de54c7",
+            "name": "genra",
+            "containerId": "",
+            "created": "2023-09-06T17:20:13.813Z",
+            "sortNum": 80000
+        },
+        {
+            "_id": "45af2333-f269-4c6e-bab2-a46d4f39dc5d",
+            "name": "movies-genras",
+            "containerId": "",
+            "created": "2023-09-06T18:29:38.170Z",
+            "sortNum": 90000
+        },
+        {
+            "_id": "d576f8e1-5496-4da0-b1a7-1ba1e0c96929",
+            "name": "watch-lists",
+            "containerId": "",
+            "created": "2023-09-07T17:52:21.388Z",
+            "sortNum": 100000
+        },
+        {
+            "_id": "c8027993-03b5-4fa4-8afd-59da62976f33",
+            "name": "ratings",
+            "containerId": "",
+            "created": "2023-09-07T20:29:52.872Z",
+            "sortNum": 110000
+        },
+        {
+            "_id": "d53378e1-002c-4cdd-9380-e2def43fc7a6",
+            "name": "reactions",
+            "containerId": "",
+            "created": "2023-09-08T21:30:18.243Z",
+            "sortNum": 112500
+        },
+        {
+            "_id": "5a7da335-82e1-487b-b4bd-85e3ca0fa2d3",
+            "name": "coins",
+            "containerId": "",
+            "created": "2023-09-10T16:56:17.528Z",
+            "sortNum": 115000
+        },
+        {
+            "_id": "f0a80aad-55b2-4e95-8c95-2dae0949dedd",
+            "name": "coins-purchases",
+            "containerId": "",
+            "created": "2023-09-13T10:17:51.385Z",
+            "sortNum": 120000
+        },
+        {
+            "_id": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "items",
+            "containerId": "",
+            "created": "2023-09-11T11:37:22.243Z",
+            "sortNum": 125000
+        },
+        {
+            "_id": "5494793d-da88-4f14-950e-c2972e6d90b4",
+            "name": "items-purchases",
+            "containerId": "",
+            "created": "2023-09-13T17:21:50.171Z",
+            "sortNum": 135000
+        },
+        {
+            "_id": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "rooms",
+            "containerId": "",
+            "created": "2023-09-14T12:58:28.992Z",
+            "sortNum": 145000
+        },
+        {
+            "_id": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "movies-session",
+            "containerId": "",
+            "created": "2023-09-14T20:53:37.589Z",
+            "sortNum": 155000
+        },
+        {
+            "_id": "37ef9241-d72b-4cd7-9652-27e88532311a",
+            "name": "ticket",
+            "containerId": "",
+            "created": "2023-09-15T18:07:45.399Z",
+            "sortNum": 165000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "055fc28b-0420-400f-809e-a21c364f94b7",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d54c0cfb-8669-4550-a776-8dce78ab273d",
+            "name": "register",
+            "url": "{{url}}/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-02T20:46:17.069Z",
+            "modified": "2023-09-03T14:14:54.861Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user_name\":\"khaled-test\",\n  \"password\":\"11111111\",\n  \"first_name\":\"test test\",\n  \"last_name\":\"test test\",\n  \"born_at\":\"2023-10-01\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b2031b14-d824-49ad-b786-99016dce0871",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d54c0cfb-8669-4550-a776-8dce78ab273d",
+            "name": "register admin",
+            "url": "{{url}}/admin/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-02T20:46:17.069Z",
+            "modified": "2023-09-03T09:37:33.846Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user_name\":\"khaled-al-hamwie511\",\n  \"password\":\"11111111\",\n  \"first_name\":\"booo\",\n  \"last_name\":\"al hamwie\",\n  \"born_at\":\"2023-01-10\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f2428127-a864-41fe-8a35-80e2403fbfc1",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d54c0cfb-8669-4550-a776-8dce78ab273d",
+            "name": "login",
+            "url": "{{url}}/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-09-02T20:46:17.069Z",
+            "modified": "2023-09-07T22:33:55.490Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user_name\":\"khaled8qa1\",\n  \"password\":\"1111111111\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "40fa5d5d-a760-4826-af62-505c0ce092e6",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d54c0cfb-8669-4550-a776-8dce78ab273d",
+            "name": "logout",
+            "url": "{{url}}/logout",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-09-02T20:46:17.069Z",
+            "modified": "2023-09-03T10:00:11.861Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b5f75e43-1495-47e2-9227-eceffdf7f942",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "find All User",
+            "url": "{{url}}/users?user_name=khaled8qa1&first_name=khaled&last_name=al hamwie&only_admin=yes&sort=first_name_ASC",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T13:35:57.033Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "user_name",
+                    "value": "khaled8qa1",
+                    "isPath": false
+                },
+                {
+                    "name": "first_name",
+                    "value": "khaled",
+                    "isPath": false
+                },
+                {
+                    "name": "last_name",
+                    "value": "al hamwie",
+                    "isPath": false
+                },
+                {
+                    "name": "coins_less_than",
+                    "value": "10",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "coins_more_than",
+                    "value": "0",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "born_before",
+                    "value": "2023-01-11",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "born_after",
+                    "value": "2023-01-09",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "only_deleted",
+                    "value": "yes",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "only_admin",
+                    "value": "yes",
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "first_name_ASC",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "766d72e3-d9a2-4985-abfe-e3fe2bd1e246",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "show profile",
+            "url": "{{url}}/users/profile",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T10:25:09.173Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4918295a-7a96-41d4-84a2-953c61641f99",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "find user by Id",
+            "url": "{{url}}/users/1",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T13:42:11.014Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d6154e04-cfcd-40b4-a990-6835a27a0962",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "update account",
+            "url": "{{url}}/users",
+            "method": "PATCH",
+            "sortNum": 90000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T13:48:39.190Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"first_name\":\"jjfalja\",\n  \"last_name\":\"bla aaa \"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6c567dad-279d-40b5-808f-751a2ea19114",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "delete account",
+            "url": "{{url}}/users",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T10:25:09.173Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6732a16d-5f90-4d29-a457-842b962c6b47",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "block user",
+            "url": "{{url}}/users/6",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T10:25:09.173Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5d879eb1-d46c-4545-a1ec-6336117caa33",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "restore user",
+            "url": "{{url}}/users/restore",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T15:17:56.362Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user_name\":\"khaled-test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c22a4971-db41-4927-8960-6bc123b36383",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "0f7cf671-5c5a-47ee-bd75-414953d73498",
+            "name": "upload avatar",
+            "url": "{{url}}/users/avatar",
+            "method": "PUT",
+            "sortNum": 260000,
+            "created": "2023-09-03T10:25:09.173Z",
+            "modified": "2023-09-03T15:41:13.111Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "pic",
+                        "value": "/home/khaled/Pictures/images/20230829_170449-removebg-preview.png"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "077149c5-a2c6-4fd8-80d5-ce64f21b9662",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "create movie",
+            "url": "{{url}}/movies",
+            "method": "POST",
+            "sortNum": 270000,
+            "created": "2023-09-03T17:30:21.145Z",
+            "modified": "2023-09-04T12:38:06.734Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "title",
+                        "value": "a movie about how"
+                    },
+                    {
+                        "name": "story_line",
+                        "value": "it is a story about a boy fall in love with a girl"
+                    },
+                    {
+                        "name": "duration",
+                        "value": "10"
+                    },
+                    {
+                        "name": "publish_at",
+                        "value": "2023-09-09"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "cover_pic",
+                        "value": "/home/khaled/program/weeb/project/cinema-managment-system-v1/src/modules/movies/movies.controller.ts",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "trailer",
+                        "value": "/home/khaled/Videos/Baki/season-1-2001/E01.mkv"
+                    },
+                    {
+                        "name": "movie",
+                        "value": "/home/khaled/Videos/Baki/season-1-2001/E01.mkv"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "d2c6dd58-3932-4ab4-87fb-c4ac771f8955",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "get movies",
+            "url": "{{url}}/movies?page=0",
+            "method": "GET",
+            "sortNum": 280000,
+            "created": "2023-09-04T13:22:31.893Z",
+            "modified": "2023-09-07T17:54:19.125Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "title",
+                    "value": "star",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "publish_before",
+                    "value": "2023-09-12",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "publish_after",
+                    "value": "2023-09-11",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "genra_id",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "87829ade-6aed-43f8-b2a7-30dd7447caa0",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "get a movie by id",
+            "url": "{{url}}/movies/3",
+            "method": "GET",
+            "sortNum": 290000,
+            "created": "2023-09-04T11:51:17.368Z",
+            "modified": "2023-09-07T23:27:48.267Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f79c7592-44f8-44bc-8d2d-7d11b788d765",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "update a movie",
+            "url": "{{url}}/movies/3",
+            "method": "PATCH",
+            "sortNum": 300000,
+            "created": "2023-09-04T12:12:13.141Z",
+            "modified": "2023-09-04T12:41:24.984Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"f\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "93ae1a95-df52-45d3-8a86-257dfc56f888",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "aed29a6c-47b5-4980-aedc-01c3e14532a7",
+            "name": "delete a movie",
+            "url": "{{url}}/movies/1",
+            "method": "DELETE",
+            "sortNum": 310000,
+            "created": "2023-09-04T12:40:37.177Z",
+            "modified": "2023-09-04T12:40:51.237Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1f86dd58-8205-4d94-85df-7b09f953afde",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "b0a2a630-a23b-4ed1-92cc-f981e9164eed",
+            "name": "get All Positions",
+            "url": "{{url}}/positions",
+            "method": "GET",
+            "sortNum": 320000,
+            "created": "2023-09-05T11:20:13.838Z",
+            "modified": "2023-09-05T11:20:28.003Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "221de443-fcfa-43b6-a566-c812377d98c5",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "Create Crew",
+            "url": "{{url}}/crews",
+            "method": "POST",
+            "sortNum": 330000,
+            "created": "2023-09-05T14:09:05.654Z",
+            "modified": "2023-09-05T14:18:23.126Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "first_name",
+                        "value": "crew test"
+                    },
+                    {
+                        "name": "last_name",
+                        "value": "crew test"
+                    },
+                    {
+                        "name": "born_at",
+                        "value": "2012-01-01"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "pic",
+                        "value": "/home/khaled/Pictures/Screenshots/Screenshot from 2023-08-30 18-28-26.png"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "192e55a7-07da-4680-9532-29c5055c5dcb",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "find crews",
+            "url": "{{url}}/crews?position_id=2",
+            "method": "GET",
+            "sortNum": 332500,
+            "created": "2023-09-05T14:50:50.910Z",
+            "modified": "2023-09-05T19:25:19.873Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "first__name",
+                    "value": "crew",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "last_name",
+                    "value": "jf",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "position_id",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "683a66c1-5fde-4ae7-8c80-104a37c1e174",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "find crew by id",
+            "url": "{{url}}/crews/1",
+            "method": "GET",
+            "sortNum": 335000,
+            "created": "2023-09-05T14:32:33.992Z",
+            "modified": "2023-09-05T14:33:07.415Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6bb9968e-f48b-4ddd-aa5b-ef100982048d",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "update crew",
+            "url": "{{url}}/crews/4",
+            "method": "PATCH",
+            "sortNum": 340000,
+            "created": "2023-09-05T14:28:49.226Z",
+            "modified": "2023-09-05T14:52:59.775Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"last_name\":\"jfsl jfdsla \"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9329d0b9-9066-4f56-85b8-91b4c024a964",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "4fc10c47-6ec6-4703-9f95-bdd1353d28be",
+            "name": "remove crew",
+            "url": "{{url}}/crews/3",
+            "method": "DELETE",
+            "sortNum": 350000,
+            "created": "2023-09-05T14:30:15.776Z",
+            "modified": "2023-09-05T14:30:55.526Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a9a9aa5a-c9f9-4a49-b786-ad0697ee482a",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "66e62cfa-b218-4ad4-82e7-43722bd57c01",
+            "name": "put a posotion for a crew",
+            "url": "{{url}}/crews-positions",
+            "method": "PUT",
+            "sortNum": 360000,
+            "created": "2023-09-05T16:31:42.632Z",
+            "modified": "2023-09-05T16:44:42.388Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"crew_id\":1,\n  \"position_id\":1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "37405823-5adc-4dd5-bf59-a6cb9fc0d922",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "45af2333-f269-4c6e-bab2-a46d4f39dc5d",
+            "name": "put a genra for a movie",
+            "url": "{{url}}/movies-genras",
+            "method": "PUT",
+            "sortNum": 360000,
+            "created": "2023-09-06T18:29:38.170Z",
+            "modified": "2023-09-06T18:46:43.682Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"movie_id\":5,\n  \"genra_id\":1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "79274269-ee48-4188-8ddc-8a14506ea833",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "66e62cfa-b218-4ad4-82e7-43722bd57c01",
+            "name": "remove a posotion for a crew",
+            "url": "{{url}}/crews-positions",
+            "method": "DELETE",
+            "sortNum": 370000,
+            "created": "2023-09-05T16:42:50.805Z",
+            "modified": "2023-09-05T16:43:34.659Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"crew_id\":1,\n  \"position_id\":1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e0df6725-78a0-48e1-8112-6a16ae17e34a",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "45af2333-f269-4c6e-bab2-a46d4f39dc5d",
+            "name": "remove a posotion for a crew",
+            "url": "{{url}}/movies-genras",
+            "method": "DELETE",
+            "sortNum": 370000,
+            "created": "2023-09-06T18:29:38.171Z",
+            "modified": "2023-09-06T18:53:49.957Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n   \"movie_id\":5,\n  \"genra_id\":1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "a5e08f24-9b52-4228-9410-0725f87d81bb",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "608fcc4f-f7bd-4b45-9b5a-52e0307e4e64",
+            "name": "Put roles",
+            "url": "{{url}}/roles",
+            "method": "PUT",
+            "sortNum": 380000,
+            "created": "2023-09-05T21:07:12.149Z",
+            "modified": "2023-09-05T21:24:43.557Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"crew_id\":4,\n  \"position_id\":1,\n  \"movie_id\":5\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e443f84-c3c7-4550-aae2-dfcfd7c07346",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "608fcc4f-f7bd-4b45-9b5a-52e0307e4e64",
+            "name": "Delete roles",
+            "url": "{{url}}/roles",
+            "method": "DELETE",
+            "sortNum": 390000,
+            "created": "2023-09-05T21:34:55.897Z",
+            "modified": "2023-09-05T21:35:02.433Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"crew_id\":4,\n  \"position_id\":1,\n  \"movie_id\":5\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "18a991ac-0ab1-4849-a114-79929f23f53a",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "608fcc4f-f7bd-4b45-9b5a-52e0307e4e64",
+            "name": "Get Movie Role",
+            "url": "{{url}}/roles/5?page=0&position_id=1&crew_name=crew",
+            "method": "GET",
+            "sortNum": 390000,
+            "created": "2023-09-05T22:29:02.476Z",
+            "modified": "2023-09-05T22:37:25.312Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "position_id",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "crew_name",
+                    "value": "crew",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "b58d3fe4-7349-4c3e-9534-d2a810bbb8a8",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "909e5a4d-0f26-4910-be82-19d056de54c7",
+            "name": "create genra",
+            "url": "{{url}}/genras",
+            "method": "POST",
+            "sortNum": 410000,
+            "created": "2023-09-06T17:20:33.856Z",
+            "modified": "2023-09-06T17:27:08.442Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"blaq\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f9b663cb-b184-48b9-81c7-c5d060f5e3d2",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "909e5a4d-0f26-4910-be82-19d056de54c7",
+            "name": "get all genras",
+            "url": "{{url}}/genras",
+            "method": "GET",
+            "sortNum": 420000,
+            "created": "2023-09-06T17:31:26.044Z",
+            "modified": "2023-09-06T17:31:39.987Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "673978e3-7334-480e-99c6-00b001f2a42c",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "909e5a4d-0f26-4910-be82-19d056de54c7",
+            "name": "update genra",
+            "url": "{{url}}/genras/21a",
+            "method": "PATCH",
+            "sortNum": 430000,
+            "created": "2023-09-06T17:38:40.217Z",
+            "modified": "2023-09-06T17:39:30.505Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"blaq\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5024ed77-79bf-45f1-85f8-d9ac905128d9",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "909e5a4d-0f26-4910-be82-19d056de54c7",
+            "name": "delete genra",
+            "url": "{{url}}/genras/3",
+            "method": "DELETE",
+            "sortNum": 440000,
+            "created": "2023-09-06T17:42:23.280Z",
+            "modified": "2023-09-06T17:42:42.958Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"blaq\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "774b8f53-0cf2-4ced-bde3-1f933430e180",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d576f8e1-5496-4da0-b1a7-1ba1e0c96929",
+            "name": "put a movie in watch list",
+            "url": "{{url}}/watch-lists",
+            "method": "PUT",
+            "sortNum": 450000,
+            "created": "2023-09-07T17:52:37.121Z",
+            "modified": "2023-09-07T17:59:08.238Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"movie_id\":5\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0bdd4985-da63-442d-ae83-a95c36eda6b0",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d576f8e1-5496-4da0-b1a7-1ba1e0c96929",
+            "name": "get my watch list",
+            "url": "{{url}}/watch-lists?genra_id=1",
+            "method": "GET",
+            "sortNum": 460000,
+            "created": "2023-09-07T18:45:34.156Z",
+            "modified": "2023-09-07T19:03:05.586Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "genra_id",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "title",
+                    "value": "fa",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "37e10237-799d-44a1-9b56-37131a2951bb",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d576f8e1-5496-4da0-b1a7-1ba1e0c96929",
+            "name": "remove movie from my watch list",
+            "url": "{{url}}/watch-lists/3",
+            "method": "DELETE",
+            "sortNum": 470000,
+            "created": "2023-09-07T19:02:23.991Z",
+            "modified": "2023-09-07T19:03:23.694Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "genra_id",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "title",
+                    "value": "fa",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "0f5bf204-de53-4525-8d2b-7767ed862670",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "c8027993-03b5-4fa4-8afd-59da62976f33",
+            "name": "create a rating",
+            "url": "{{url}}/ratings",
+            "method": "POST",
+            "sortNum": 470000,
+            "created": "2023-09-07T20:30:05.910Z",
+            "modified": "2023-09-08T22:15:20.617Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"movie_id\":4,\n  \"rating\":8.0,\n  \"comment\":\"I really like this movie it was awsome\" \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "36230344-a526-4021-a744-d3260a81ed29",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5a7da335-82e1-487b-b4bd-85e3ca0fa2d3",
+            "name": "create a coin",
+            "url": "{{url}}/coins",
+            "method": "POST",
+            "sortNum": 470000,
+            "created": "2023-09-10T16:56:17.529Z",
+            "modified": "2023-09-10T16:59:17.746Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"price\":20,\n  \"amount\":10\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f6be3982-ebd3-49bd-b16e-5114ee8d8b1f",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "create an item",
+            "url": "{{url}}/items",
+            "method": "POST",
+            "sortNum": 470000,
+            "created": "2023-09-11T11:37:22.243Z",
+            "modified": "2023-09-11T11:41:31.512Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"price\":20,\n  \"name\":\"over watch \",\n  \"description\":\"get the official over watch t-shirt\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "715d0914-28a7-46ff-9f97-a0ef1340e735",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5494793d-da88-4f14-950e-c2972e6d90b4",
+            "name": "purchase an item",
+            "url": "{{url}}/items-purchases",
+            "method": "POST",
+            "sortNum": 470000,
+            "created": "2023-09-13T17:21:50.171Z",
+            "modified": "2023-09-13T17:24:12.704Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"item_id\":3,\n  \"amount\":1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "870f55d1-945c-45c1-b5a2-f83c1cf51380",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "c8027993-03b5-4fa4-8afd-59da62976f33",
+            "name": "find ratings",
+            "url": "{{url}}/ratings/5?sort=newest",
+            "method": "GET",
+            "sortNum": 475000,
+            "created": "2023-09-07T22:31:48.040Z",
+            "modified": "2023-09-07T22:35:16.179Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "newest",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "1464fe82-a487-4b1d-9227-d4037129ecf6",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5a7da335-82e1-487b-b4bd-85e3ca0fa2d3",
+            "name": "find coins",
+            "url": "{{url}}/coins",
+            "method": "GET",
+            "sortNum": 475000,
+            "created": "2023-09-10T16:56:17.530Z",
+            "modified": "2023-09-10T17:04:24.830Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7a4c7d59-f6cc-414c-8d39-b26f815580ba",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "get all items",
+            "url": "{{url}}/items?price_less_than=40&price_more_than=10&page=0&sort=price_ASC",
+            "method": "GET",
+            "sortNum": 475000,
+            "created": "2023-09-11T11:37:22.244Z",
+            "modified": "2023-09-11T12:32:48.072Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "over",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "price_less_than",
+                    "value": "40",
+                    "isPath": false
+                },
+                {
+                    "name": "price_more_than",
+                    "value": "10",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "price_ASC",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "0948333b-7bed-455d-a97c-6cc64bcb71a8",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5494793d-da88-4f14-950e-c2972e6d90b4",
+            "name": "get my items purchase",
+            "url": "{{url}}/items-purchases?price_less_than=40&price_more_than=10&page=0&sort=price_ASC",
+            "method": "GET",
+            "sortNum": 475000,
+            "created": "2023-09-13T17:21:50.172Z",
+            "modified": "2023-09-13T17:42:51.910Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "over",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "price_less_than",
+                    "value": "40",
+                    "isPath": false
+                },
+                {
+                    "name": "price_more_than",
+                    "value": "10",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "price_ASC",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "53bf71e9-6e2f-44b4-8d9f-b8b862aa2ff0",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "c8027993-03b5-4fa4-8afd-59da62976f33",
+            "name": "update a rating",
+            "url": "{{url}}/ratings/1",
+            "method": "PATCH",
+            "sortNum": 480000,
+            "created": "2023-09-07T21:03:05.230Z",
+            "modified": "2023-09-07T21:09:09.651Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rating\":10.0,\n  \"comment\":\"I really like this movie it was awsome\" \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c9c53c03-eca7-4148-b0e1-3e4a2afc900f",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "get an item",
+            "url": "{{url}}/items/2",
+            "method": "GET",
+            "sortNum": 482500,
+            "created": "2023-09-11T11:44:03.465Z",
+            "modified": "2023-09-11T11:45:27.656Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d52a505c-e4e8-484a-82c8-39704dab0402",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5494793d-da88-4f14-950e-c2972e6d90b4",
+            "name": "get user's item purchases",
+            "url": "{{url}}/items-purchases/1",
+            "method": "GET",
+            "sortNum": 482500,
+            "created": "2023-09-13T17:21:50.174Z",
+            "modified": "2023-09-13T20:46:51.825Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d10c4b85-873a-422c-9553-771fd068fe46",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "update an item",
+            "url": "{{url}}/items/2",
+            "method": "PATCH",
+            "sortNum": 486250,
+            "created": "2023-09-11T11:45:40.050Z",
+            "modified": "2023-09-11T12:31:56.717Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"the updated name \",\n  \"price\":40\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2d535a96-96eb-4ef7-8567-7fac3a6260e7",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "c8027993-03b5-4fa4-8afd-59da62976f33",
+            "name": "delete a rating",
+            "url": "{{url}}/ratings/1",
+            "method": "DELETE",
+            "sortNum": 490000,
+            "created": "2023-09-07T21:14:40.381Z",
+            "modified": "2023-09-07T21:18:13.441Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "156afea2-38da-4faa-be6c-0d5f40974ee4",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "5a7da335-82e1-487b-b4bd-85e3ca0fa2d3",
+            "name": "delete a coin",
+            "url": "{{url}}/coins/1",
+            "method": "DELETE",
+            "sortNum": 490000,
+            "created": "2023-09-10T16:56:17.532Z",
+            "modified": "2023-09-10T19:06:11.954Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "de5efadf-200f-4713-871a-59a178bba430",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "88354b6f-8219-492d-8ac1-e1a086690172",
+            "name": "delete an item",
+            "url": "{{url}}/items/1",
+            "method": "DELETE",
+            "sortNum": 490000,
+            "created": "2023-09-11T11:37:22.245Z",
+            "modified": "2023-09-11T11:42:40.885Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "24318698-a925-47ef-aaab-67ad752f262c",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "d53378e1-002c-4cdd-9380-e2def43fc7a6",
+            "name": "toggle like/dislike",
+            "url": "{{url}}/reactions",
+            "method": "PUT",
+            "sortNum": 500000,
+            "created": "2023-09-08T21:30:40.161Z",
+            "modified": "2023-09-08T22:07:40.392Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rating_id\":4,\n  \"value\":-1\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "73430762-8aa9-4a2c-b973-78042bccb7c5",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "f0a80aad-55b2-4e95-8c95-2dae0949dedd",
+            "name": "get coins purchases",
+            "url": "{{url}}/coins-purchases",
+            "method": "GET",
+            "sortNum": 510000,
+            "created": "2023-09-13T10:18:11.322Z",
+            "modified": "2023-09-13T10:18:50.418Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "67b1a660-7243-4254-bb3c-22a593ea8275",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "create room",
+            "url": "{{url}}/rooms",
+            "method": "POST",
+            "sortNum": 520000,
+            "created": "2023-09-14T12:58:37.876Z",
+            "modified": "2023-09-14T15:42:28.963Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"first room12\",\n  \"row_count\":4,\n  \"column_count\":4\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "edd5fb37-89a8-4ade-92f9-03e53229ec8e",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "create movie session",
+            "url": "{{url}}/movies-sessions",
+            "method": "POST",
+            "sortNum": 520000,
+            "created": "2023-09-14T20:53:37.590Z",
+            "modified": "2023-09-16T22:28:24.800Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"movie_id\":5,\n  \"room_id\":4,\n  \"name\":\"see you agaion\",\n  \"duration\":1,\n  \"date\":\"2023-09-18\",\n  \"price\":12\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "1f607866-d404-476d-b869-ffabf4168f1f",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "37ef9241-d72b-4cd7-9652-27e88532311a",
+            "name": "create ticket",
+            "url": "{{url}}/tickets",
+            "method": "POST",
+            "sortNum": 520000,
+            "created": "2023-09-15T18:07:45.399Z",
+            "modified": "2023-09-15T18:20:49.938Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"movie_session_id\":3,\n  \"seet_id\":20\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf43065c-5a20-4cfb-a222-080873fd8802",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "find all room",
+            "url": "{{url}}/rooms?page=0&sort=name_DESC",
+            "method": "GET",
+            "sortNum": 525000,
+            "created": "2023-09-14T14:39:51.321Z",
+            "modified": "2023-09-14T15:43:31.153Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "name",
+                    "value": "first",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "name_DESC",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "3d48de96-8bf0-493f-b885-76bca56beea0",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "find all movies session",
+            "url": "{{url}}/movies-sessions?page=0",
+            "method": "GET",
+            "sortNum": 525000,
+            "created": "2023-09-14T20:53:37.591Z",
+            "modified": "2023-09-15T20:22:17.829Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "name",
+                    "value": "firstq",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "sort",
+                    "value": "name_DESC",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "movie_id",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "price_less",
+                    "value": "14",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "2aef47ee-bd74-4eb0-b91f-a08f10df7ef7",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "37ef9241-d72b-4cd7-9652-27e88532311a",
+            "name": "find all ticket",
+            "url": "{{url}}/tickets?created_before=2023-10-10",
+            "method": "GET",
+            "sortNum": 525000,
+            "created": "2023-09-15T18:07:45.400Z",
+            "modified": "2023-09-15T19:12:27.268Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "0",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "movie_id",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "created_before",
+                    "value": "2023-10-10",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "e261894e-36a8-45b5-abeb-199308eb7ff4",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "find a room ",
+            "url": "{{url}}/rooms/10",
+            "method": "GET",
+            "sortNum": 527500,
+            "created": "2023-09-14T14:49:45.307Z",
+            "modified": "2023-09-14T15:43:46.173Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "fbb00f1e-7c22-43f4-93e5-99610671d275",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "find a movie session",
+            "url": "{{url}}/movies-sessions/3",
+            "method": "GET",
+            "sortNum": 527500,
+            "created": "2023-09-14T20:53:37.592Z",
+            "modified": "2023-09-15T20:22:24.343Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b5b7a6d3-2631-4260-9d09-77b56d7aadca",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "37ef9241-d72b-4cd7-9652-27e88532311a",
+            "name": "find a movie session",
+            "url": "{{url}}/movies-sessions/2",
+            "method": "GET",
+            "sortNum": 527500,
+            "created": "2023-09-15T18:07:45.401Z",
+            "modified": "2023-09-15T18:07:45.399Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3b761e41-14e9-400b-83ea-e75699ff2210",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "update room",
+            "url": "{{url}}/rooms/1",
+            "method": "PATCH",
+            "sortNum": 530000,
+            "created": "2023-09-14T14:27:26.109Z",
+            "modified": "2023-09-14T14:29:56.031Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"first room1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "07ee9744-0a56-44e6-8da8-ef0c25aaf5a6",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "update movie session",
+            "url": "{{url}}/movies-sessions/3",
+            "method": "PATCH",
+            "sortNum": 530000,
+            "created": "2023-09-14T20:53:37.593Z",
+            "modified": "2023-09-14T21:36:17.999Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"first room1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e16669ca-87c8-4eb5-a2f0-7b2f6571ffac",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "9badfe4b-3014-4c90-8906-00573aae2964",
+            "name": "delete room",
+            "url": "{{url}}/rooms/5",
+            "method": "DELETE",
+            "sortNum": 540000,
+            "created": "2023-09-14T14:31:49.752Z",
+            "modified": "2023-09-14T15:35:54.583Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "592353dd-422f-4e61-ae55-db062d3b5df4",
+            "colId": "b5a52b54-967c-469c-a440-4f29333a4bf8",
+            "containerId": "902f5ce4-c54b-4d75-9251-e62210011b29",
+            "name": "delete movie session",
+            "url": "{{url}}/movies-sessions/2",
+            "method": "DELETE",
+            "sortNum": 540000,
+            "created": "2023-09-14T20:53:37.594Z",
+            "modified": "2023-09-14T21:31:10.725Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
